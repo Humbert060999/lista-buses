@@ -1,9 +1,8 @@
 import "./App.css";
 import React, { useState } from "react";
-import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import ConvertirPDF from "./ConvertirPDF";
 import { Input, Form, DatePicker, TimePicker, Button } from "antd";
-import moment from "moment";
 
 function App() {
   const [showDownloadLink, setShowDownloadLink] = useState(false);

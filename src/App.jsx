@@ -95,9 +95,9 @@ function App() {
           Enviar
         </Button>
       </Form>
-      <PDFViewer style={{ marginLeft: 100 }} width="1000" height="700">
+      {/* <PDFViewer style={{ marginLeft: 100 }} width="1000" height="700">
         <ConvertirPDF data={data} />
-      </PDFViewer>
+      </PDFViewer> */}
 
       {showDownloadLink && (
         <div>

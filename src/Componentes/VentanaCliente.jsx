@@ -10,10 +10,6 @@ export default function VentanaCliente() {
   const [form] = Form.useForm();
   const [licencia, setLicencia] = useState("");
   const [placaCamion, setPlacaCamion] = useState("");
-  const [nombres, setNombres] = useState("");
-  const [apellidos, setApellidos] = useState("");
-  const [modeloCamion, setModeloCamion] = useState("");
-  const [polizaCamion, setPolizaCamion] = useState("");
 
   const origenes = [
     {

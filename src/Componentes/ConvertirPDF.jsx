@@ -7,8 +7,8 @@ import {
   StyleSheet,
   Image,
 } from "@react-pdf/renderer";
-import LogoBus from "./Imagenes/logo-bus.png";
-import LogoLetras from "./Imagenes/logo-titulo.png";
+import LogoBus from "../Imagenes/logo-bus.png";
+import LogoLetras from "../Imagenes/logo-titulo.png";
 
 // Definir estilos
 const styles = StyleSheet.create({
@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     padding: 20,
     fontSize: 10,
-    fontWeight: "bold",
   },
   header: {
     flexDirection: "row",
@@ -26,16 +25,12 @@ const styles = StyleSheet.create({
   fechaViaje: {
     marginLeft: 430,
   },
+
   fila1: {
     display: "flex",
     flexWrap: "wrap",
     flexDirection: "row",
     marginTop: 10,
-  },
-  label: {
-    flex: 1,
-    fontWeight: "bold",
-    backgroundColor: "#CFE8EF",
   },
   value: {
     flex: 1,
@@ -45,6 +40,7 @@ const styles = StyleSheet.create({
   },
   espacioLabel: {
     marginLeft: 20,
+    fontWeight: "bold",
   },
   espacioHora: {
     marginLeft: "10%",
@@ -74,7 +70,7 @@ export default function ConvertirPDF({ data }) {
           </Text>
         </View>
         <View style={styles.fila1}>
-          <Text>Origen:</Text>
+          <Text style={{ fontWeight: "bold" }}>Origen:</Text>
           <Text style={styles.espacioTexto}>{data.origen}</Text>
 
           <Text style={styles.espacioLabel}>Destino:</Text>
@@ -99,6 +95,19 @@ export default function ConvertirPDF({ data }) {
 
           <Text style={{ marginLeft: 10 }}>Licencia:</Text>
           <Text style={styles.espacioTexto}>{data.licencia2}</Text>
+        </View>
+        <View style={styles.dosColumnas}>
+          <Text>Resolucion Chilena Excenta N°:</Text>
+          <Text>{data.resolucionChilena}</Text>
+
+          <Text>Vence:</Text>
+          <Text>{data.vencimientoResolucion}</Text>
+
+          <Text>Modelo:</Text>
+          <Text>{data.modelo}</Text>
+
+          <Text>Año:</Text>
+          <Text>{data.anio}</Text>
         </View>
       </Page>
     </Document>

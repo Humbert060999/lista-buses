@@ -9,7 +9,6 @@ export default function VentanaCliente() {
   const [data, setData] = useState([]);
   const [form] = Form.useForm();
   const [licencia, setLicencia] = useState("");
-  const [placaCamion, setPlacaCamion] = useState("");
 
   const origenes = [
     {
@@ -44,7 +43,7 @@ export default function VentanaCliente() {
   const listaDatos = [
     { licencia: "12345", nombres: "Juan", apellidos: "Pérez" },
     { licencia: "67890", nombres: "María", apellidos: "Gómez" },
-    { licencia: "12714653", nombres: "Humberto", apellidos: "Lucana Mamani" },
+    { licencia: "12714653", nombres: "HUMBERTO", apellidos: "LUCANA MAMANI" },
   ];
 
   const listaCamiones = [
@@ -83,6 +82,12 @@ export default function VentanaCliente() {
     },
   ];
 
+  const listaCamionesSelect = [
+    { value: "ABC123", label: "ABC123" },
+    { value: "DEF456", label: "DEF456" },
+    { value: "2357BKA", label: "2357BKA" },
+  ];
+
   useEffect(() => {
     // console.log("Si llega a la ventana");
   }, []);
@@ -90,24 +95,16 @@ export default function VentanaCliente() {
   const registrarDatos = (values) => {
     console.log("Datos del formulario:", values);
 
-    const fecha = values.fechaViaje;
-    const hora = values.horaViaje;
+    const fechaOriginal = values.fechaViaje;
+    const fechaVenceCamion = values.venceCamion;
 
-    if (!fecha || !hora) {
-      console.error("Fecha o hora no seleccionadas correctamente.");
-      return;
-    }
+    const partesFecha = fechaOriginal.split("-");
+    const partesFecha2 = fechaVenceCamion.split("-");
 
-    let nuevaFechaViaje;
-    let nuevaHoraViaje;
+    // Reorganizar las partes a [dd, mm, aaaa]
+    const fechaViajeFormateada = `${partesFecha[2]}-${partesFecha[1]}-${partesFecha[0]}`;
+    const fechaVenceCamionFormateada = `${partesFecha2[2]}-${partesFecha2[1]}-${partesFecha2[0]}`;
 
-    try {
-      nuevaFechaViaje = fecha.format("DD-MM-YYYY");
-      nuevaHoraViaje = hora.format("HH:mm");
-    } catch (error) {
-      console.error("Error al formatear la fecha o la hora:", error);
-      return;
-    }
     const conductor1 =
       values.nombresConductor1 + " " + values.apellidosConductor1;
     const conductor2 =
@@ -117,12 +114,20 @@ export default function VentanaCliente() {
       origen: values.origen,
       destino: values.destino,
       placa: values.placa,
-      fechaViaje: nuevaFechaViaje,
-      horaViaje: nuevaHoraViaje,
+      fechaViaje: fechaViajeFormateada,
+      horaViaje: values.horaViaje,
       conductor1: conductor1,
       conductor2: conductor2,
       licencia1: values.licencia1,
       licencia2: values.licencia2,
+      resolucionChilena: values.resolucionChilena,
+      venceCamion: fechaVenceCamionFormateada,
+      modeloCamion: values.modeloCamion,
+      anioCamion: values.anioCamion,
+      polizaSeguro: values.polizaCamion,
+      vtoCamion: values.vtoCamion,
+      chasisCamion: values.chasisCamion,
+      motorCamion: values.motorCamion,
     };
     setShowDownloadLink(true);
     setData(datos);
@@ -174,10 +179,8 @@ export default function VentanaCliente() {
   };
 
   const buscarPlacaCamiones = (e) => {
-    const placa = e.target.value;
-    setPlacaCamion(placa);
 
-    const datos = listaCamiones.find((item) => item.placa === placa);
+    const datos = listaCamiones.find((item) => item.placa === e);
     if (datos) {
       // Si se encuentra, llenar los otros campos usando form.setFieldValue
       form.setFieldsValue({
@@ -185,10 +188,10 @@ export default function VentanaCliente() {
         polizaCamion: datos.polizaSeguro,
         resolucionChilena: datos.resolucionChilena, // Incluye el campo de resolución
         vtoCamion: datos.VTO,
-        venceCamion: datos.vence, // Incluye el campo de vencimiento
+        venceCamion: datos.vence,
         chasisCamion: datos.chasis,
         motorCamion: datos.motor,
-        anioCamion: datos.anio, // Cambiado de año a anio
+        anioCamion: datos.anio,
       });
     } else {
       // Si no se encuentra, limpiar los campos
@@ -267,7 +270,7 @@ export default function VentanaCliente() {
                 type="date"
                 id="fecha"
                 placeholder="Seleccione la fecha de viaje"
-                class="input-estilo"
+                className="input-estilo"
               />
             </Form.Item>
             <Form.Item
@@ -280,7 +283,7 @@ export default function VentanaCliente() {
                 },
               ]}
             >
-              <input type="time" id="hora" class="input-estilo" />
+              <input type="time" id="hora" className="input-estilo" />
             </Form.Item>
           </div>
         </div>
@@ -394,10 +397,11 @@ export default function VentanaCliente() {
                 },
               ]}
             >
-              <Input
-                placeholder="Ingrese la placa o patente"
-                value={placaCamion}
+              <Select
                 onChange={buscarPlacaCamiones}
+                allowClear
+                placeholder="Seleccione la placa"
+                options={listaCamionesSelect}
               />
             </Form.Item>
             <Form.Item

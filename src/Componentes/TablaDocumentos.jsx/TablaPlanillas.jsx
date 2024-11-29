@@ -2,7 +2,7 @@ import "./TablaPlanillas.css";
 
 import React, { useState, useEffect } from "react";
 import { Table, Button, Space } from "antd";
-import Formulario from "../ventanaCliente";
+import Formulario from "../VentanaCliente";
 
 export default function TablaPlanillas() {
   const [mostrarTabla, setMostrarTabla] = useState(true);

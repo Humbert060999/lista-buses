@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./Componentes/Login";
-import VentanaCliente from "./Componentes/ventanaCliente";
+import VentanaCliente from "./Componentes/VentanaCliente";
 import Home from "./Componentes/Home/Home";
 import Contactos from "./Componentes/Contactos/Contactos";
 

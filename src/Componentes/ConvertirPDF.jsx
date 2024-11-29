@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Page,
   Text,
@@ -6,7 +6,6 @@ import {
   Document,
   StyleSheet,
   Image,
-  Font,
 } from "@react-pdf/renderer";
 import LogoBus from "../Imagenes/logo-bus.png";
 import LogoLetras from "../Imagenes/logo-titulo.png";
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexWrap: "wrap",
     flexDirection: "row",
-    marginTop: 10,
+    marginTop: 5,
   },
   espacioTexto: {
     marginLeft: 5,
@@ -51,13 +50,13 @@ const styles = StyleSheet.create({
     display: "flex",
     flexWrap: "wrap",
     flexDirection: "row",
-    marginTop: 10,
+    marginTop: 5,
   },
   ultimaFila: {
     display: "flex",
     flexWrap: "wrap",
     flexDirection: "row",
-    marginTop: 10,
+    marginTop: 5,
     marginBottom: 10,
   },
   table: {
@@ -757,7 +756,34 @@ const exampleData = [
   },
 ];
 
-export default function ConvertirPDF({ data }) {
+export default function ConvertirPDF({ data, dataPasajeros }) {
+  const [listPasajeros, setListPasajeros] = useState([]);
+  useEffect(() => {
+    console.log("Los datos recibidos son: ", data);
+    console.log(
+      "Los datos de los pasajeros que se resiven son: ",
+      dataPasajeros
+    );
+    convertirListaPasajeros();
+  }, [data]);
+
+  const convertirListaPasajeros = () => {
+    for (let i = 0; i < dataPasajeros.length; i++) {
+      const nuevoPasajero = {
+        number: i + 1,
+        nombre: dataPasajeros[i].nombre,
+        apellido: dataPasajeros[i].apellido,
+        nac: "CBBA",
+        ci: dataPasajeros[i].ci,
+        fechaNac: dataPasajeros[i].fechaNacimiento,
+        origen: data.origen,
+        sexo: dataPasajeros[i].sexo === 1 ? "M" : "F",
+        destino: data.destino,
+      };
+      setListPasajeros((prevData) => [...prevData, nuevoPasajero]);
+    }
+  };
+
   return (
     <Document>
       <Page size="Legal" style={styles.page}>
@@ -839,7 +865,7 @@ export default function ConvertirPDF({ data }) {
             <Text style={styles.col8}>SEXO</Text>
             <Text style={styles.col9}>DESTINO</Text>
           </View>
-          {exampleData.map((row, i) => (
+          {listPasajeros.map((row, i) => (
             <View key={i} style={styles.row} wrap={false}>
               <Text style={styles.col1}>{row.number}</Text>
               <Text style={styles.col2}>{row.nombre}</Text>

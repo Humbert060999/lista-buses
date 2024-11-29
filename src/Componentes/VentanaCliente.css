@@ -36,7 +36,7 @@ h2 {
 }
 
 .input-estilo {
-  width: 98.6%; 
+  width: 96.7%; 
   padding: 5px; 
   font-size: 16px; 
   border: 1px solid #d9d9d9; 
@@ -85,6 +85,14 @@ h2 {
   width: 45%;
 }
 
+.form-pasajeros-container{
+  max-width: 30%;
+}
+
+.modal-confirm, .modal-closed{
+  margin-top: 10%;
+}
+
 @media only screen and (max-width: 1080px) {
   .formulario-cliente {
     padding: 5%;
@@ -116,5 +124,11 @@ h2 {
   .datos-bus-uno,
   .datos-bus-dos {
     width: 100%;
+  }
+
+  .modal-confirm, .modal-closed{
+    display: flex;
+    align-items: center;
+    min-height: 60vh;
   }
 }

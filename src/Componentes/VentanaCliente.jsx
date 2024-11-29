@@ -1,14 +1,93 @@
 import "./VentanaCliente.css";
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import ConvertirPDF from "./ConvertirPDF";
-import { Input, Form, Button, Select } from "antd";
+import {
+  Input,
+  Form,
+  Button,
+  Select,
+  Modal,
+  Radio,
+  message,
+  Table,
+  Popconfirm,
+} from "antd";
+import { ExclamationCircleFilled } from "@ant-design/icons";
+
+const { confirm } = Modal;
 
 export default function VentanaCliente() {
-  const [showDownloadLink, setShowDownloadLink] = useState(false);
+  const [showDownloadLink, setShowDownloadLink] = useState(true);
   const [data, setData] = useState([]);
   const [form] = Form.useForm();
+  const [form2] = Form.useForm();
   const [licencia, setLicencia] = useState("");
+  const [value, setValue] = useState(1);
+  const [listPasajeros, setListPasajeros] = useState([]);
+  const [scrollY, setScrollY] = useState(450);
+
+  const columsTablePasajeros = [
+    {
+      title: "CI",
+      dataIndex: "ci",
+      key: "ci",
+      width: 27,
+    },
+    {
+      title: "Nombre",
+      dataIndex: "nombre",
+      key: "nombre",
+      width: 30,
+    },
+    {
+      title: "Apellidos",
+      dataIndex: "apellido",
+      key: "apellido",
+      width: 30,
+    },
+    {
+      title: "Accion",
+      dataIndex: "operacion",
+      key:"accion",
+      width: 25,
+      render: (_, record) =>
+        listPasajeros.length >= 1 ? (
+          <Popconfirm
+            title="Esta seguro de eliminar ?"
+            onConfirm={() => handleDelete(record.key)}
+          >
+            <a>Eliminar</a>
+          </Popconfirm>
+        ) : null,
+    },
+  ];
+
+  const handleDelete = (key) => {
+    const newData = listPasajeros.filter((item) => item.key !== key);
+    setListPasajeros(newData);
+  };
+
+  useEffect(() => {
+    form2.setFieldsValue({ sexo: 1 });
+    console.log("Los datos de la lista de pasajeros son: ", listPasajeros);
+
+    // Función para actualizar el scroll según el tamaño de la pantalla
+    const handleResize = () => {
+      const width = window.innerWidth;
+
+      if (width < 768) {
+        setScrollY(610);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [form2, listPasajeros]);
 
   const origenes = [
     {
@@ -87,10 +166,6 @@ export default function VentanaCliente() {
     { value: "DEF456", label: "DEF456" },
     { value: "2357BKA", label: "2357BKA" },
   ];
-
-  useEffect(() => {
-    // console.log("Si llega a la ventana");
-  }, []);
 
   const registrarDatos = (values) => {
     console.log("Datos del formulario:", values);
@@ -179,7 +254,6 @@ export default function VentanaCliente() {
   };
 
   const buscarPlacaCamiones = (e) => {
-
     const datos = listaCamiones.find((item) => item.placa === e);
     if (datos) {
       // Si se encuentra, llenar los otros campos usando form.setFieldValue
@@ -206,6 +280,66 @@ export default function VentanaCliente() {
         anioCamion: "", // Cambiado de año a anio
       });
     }
+  };
+
+  const [viewModal, setViewModal] = useState(false);
+
+  const viewFormCustomer = () => {
+    setViewModal(true);
+  };
+
+  const closeModal = () => {
+    setViewModal(false);
+  };
+
+  const showCloseConfirm = () => {
+    confirm({
+      title: "¿Estás seguro de cerrar el formulario?",
+      icon: <ExclamationCircleFilled />,
+      content: "Si cierras el formulario, perderás los cambios no guardados.",
+      okText: "Sí",
+      cancelText: "Cancelar",
+      className: "modal-closed",
+      onOk() {
+        closeModal();
+        form2.resetFields();
+        form2.setFieldsValue({ sexo: 1 });
+      },
+      onCancel() {
+        console.log("Operación cancelada");
+      },
+    });
+  };
+
+  const showInsertConfirm = (date) => {
+    confirm({
+      title: "¿Estás seguro de guardar los datos?",
+      icon: <ExclamationCircleFilled />,
+      content: "Revisa que los datos estén correctos antes de continuar.",
+      okText: "Sí",
+      cancelText: "Cancelar",
+      className: "modal-confirm",
+      onOk() {
+        console.log("Datos insertados:", date);
+        setListPasajeros((prevData) => [...prevData, date]);
+        form2.resetFields();
+        form2.setFieldsValue({ sexo: 1 });
+        message.success("El pasajero se añadió correctamente");
+        closeModal();
+      },
+      onCancel() {
+        console.log("Operación cancelada");
+      },
+    });
+  };
+
+  const onChange = (e) => {
+    console.log("radio checked", e.target.value);
+    setValue(e.target.value);
+  };
+
+  const guadarDatosPasajeros = (date) => {
+    showInsertConfirm(date);
   };
 
   return (
@@ -439,19 +573,90 @@ export default function VentanaCliente() {
         <Button type="primary" htmlType="submit">
           Enviar
         </Button>
+        <Button onClick={viewFormCustomer}>Formulario</Button>
       </Form>
-      <PDFViewer style={{ marginLeft: 100 }} width="1000" height="700">
-        <ConvertirPDF data={data} />
-      </PDFViewer>
-
+      {/* Tabla para mostrar la lista de los pasajeros que se van añadiendo */}
+      <h4 style={{ textAlign: "center" }}>Lista de pasajeros</h4>
+      <Table
+        columns={columsTablePasajeros}
+        dataSource={listPasajeros}
+        scroll={{ y: scrollY }}
+        pagination={false}
+      />
+      {/* Modal para mostrar el formulario de registro de los pasajeros */}
+      <Modal
+        title={<h3 style={{ textAlign: "center" }}>Formulario de pasajero</h3>}
+        open={viewModal}
+        onOk={() => form2.submit()}
+        onCancel={showCloseConfirm}
+        okText="Guardar"
+        cancelText="Cerrar"
+        width="90%"
+        className="form-pasajeros-container"
+      >
+        <Form form={form2} layout="vertical" onFinish={guadarDatosPasajeros}>
+          <Form.Item
+            label="CI"
+            name="ci"
+            rules={[{ required: true, message: "Por favor, ingresa el ci " }]}
+          >
+            <Input placeholder="Ingrese el numero de carnet" />
+          </Form.Item>
+          <Form.Item
+            label="Nombre"
+            name="nombre"
+            rules={[
+              { required: true, message: "Por favor, ingresa los nombre" },
+            ]}
+          >
+            <Input placeholder="Ingrese nombre(s)" />
+          </Form.Item>
+          <Form.Item
+            label="Apellido"
+            name="apellido"
+            rules={[
+              { required: true, message: "Por favor, ingresa los apellidos" },
+            ]}
+          >
+            <Input placeholder="Ingrese los apellidos" />
+          </Form.Item>
+          <Form.Item
+            label="Fecha de nacimiento"
+            name="fechaNacimiento"
+            rules={[
+              {
+                required: true,
+                message: "Por favor, seleccione la fecha de nacimiento",
+              },
+            ]}
+          >
+            <input
+              type="date"
+              className="input-estilo"
+              placeholder="Seleccione la fecha de nacimiento"
+            />
+          </Form.Item>
+          <Form.Item label="Sexo" name="sexo">
+            <Radio.Group onChange={onChange} value={value}>
+              <Radio value={1}>Masculino</Radio>
+              <Radio value={2}>Femenino</Radio>
+            </Radio.Group>
+          </Form.Item>
+        </Form>
+      </Modal>
+      {/* <PDFViewer style={{ marginLeft: 100 }} width="1000" height="700">
+        <ConvertirPDF data={data} dataPasajeros={listPasajeros} />
+      </PDFViewer> */}
       {showDownloadLink && (
         <div>
           <PDFDownloadLink
-            document={<ConvertirPDF data={data} />}
-            fileName="document.pdf"
+            document={
+              <ConvertirPDF data={data} dataPasajeros={listPasajeros} />
+            }
+            fileName="mi-documento.pdf"
           >
             {({ blob, url, loading, error }) =>
-              loading ? "Cargando documento..." : "Descargar PDF"
+              loading ? "Generando PDF..." : "Descargar PDF"
             }
           </PDFDownloadLink>
         </div>

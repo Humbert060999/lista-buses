@@ -1,0 +1,19 @@
+.tabla-container {
+  width: 95%;
+  margin-left: 2%;
+  margin-top: 2%;
+}
+
+.tabla-button-nuevo{
+  width: 95%;
+  margin: 2%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .tabla-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+}

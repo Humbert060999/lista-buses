@@ -21,8 +21,8 @@ export default function Login() {
 
     if (user) {
       // Inicio de sesión exitoso
-      navigate("/cliente");
-      message.success("Inicio de sesión corremtamente ")
+      navigate("/inicio");
+      message.success("Inicio de sesión correctamente ")
     } else {
       // Error de autenticación
       message.error("Usuario o contraseña incorrectos");
@@ -62,7 +62,7 @@ export default function Login() {
           >
             <Input.Password placeholder="Ingrese la contraseña" />
           </Form.Item>
-          <Button type="primary" block htmlType="submit">
+          <Button type="primary" block  htmlType="submit">
             Ingresar
           </Button>
         </div>

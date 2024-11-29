@@ -19,6 +19,7 @@ export default function Home() {
       <div className="home-menu">{isMobile ? <MenuMobile /> : <Menu />}</div>
       <div className="home-table">
         <TablaPlanillas />
+        
       </div>
     </div>
   );

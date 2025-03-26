@@ -1,0 +1,161 @@
+h2 {
+  text-align: center;
+}
+
+.linea-con-texto {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.linea-con-texto::before,
+.linea-con-texto::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #000;
+}
+
+.linea-con-texto::before {
+  margin-right: 10px;
+}
+
+.linea-con-texto::after {
+  margin-left: 10px;
+}
+
+.formulario-cliente {
+  background-color: #ffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.456);
+  margin: 10%;
+  margin-top: 0;
+  margin-bottom: 4%;
+  padding: 2%;
+  border-radius: 10px;
+}
+
+.input-estilo {
+  width: 96.7%;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #3d3d3dd9;
+}
+
+.input-estilo:focus {
+  border-color: #40a9ff;
+  box-shadow: 0 0 6px rgba(24, 144, 255, 0.2);
+  outline: none;
+  font-weight: normal;
+}
+
+.datos-viaje {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.datos-viaje-uno,
+.datos-viaje-dos {
+  width: 45%;
+}
+
+.datos-conductor {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.datos-conductor-uno,
+.datos-conductor-dos {
+  width: 45%;
+}
+
+.datos-bus {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.datos-bus-uno,
+.datos-bus-dos {
+  width: 45%;
+}
+
+.form-pasajeros-container {
+  max-width: 30%;
+}
+
+.modal-confirm,
+.modal-closed {
+  margin-top: 10%;
+}
+
+.cliente-button-back {
+  position: absolute;
+  margin-left: 4%;
+ 
+}
+
+.cliente-tabla-pasajeros {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; 
+}
+
+.tabla-pasajeros {
+  background-color: #ffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.456);
+  border-radius: 15px;
+  width: 80%;
+}
+
+@media only screen and (max-width: 1080px) {
+  .formulario-cliente {
+    padding: 5%;
+    border-radius: 10px;
+  }
+
+  .datos-viaje {
+    flex-direction: column;
+  }
+
+  .datos-viaje-uno,
+  .datos-viaje-dos {
+    width: 100%;
+  }
+
+  .datos-conductor {
+    flex-direction: column;
+  }
+
+  .datos-conductor-uno,
+  .datos-conductor-dos {
+    width: 100%;
+  }
+
+  .datos-bus {
+    flex-direction: column;
+  }
+
+  .datos-bus-uno,
+  .datos-bus-dos {
+    width: 100%;
+  }
+
+  .modal-confirm,
+  .modal-closed {
+    display: flex;
+    align-items: center;
+    min-height: 60vh;
+  }
+
+  .cliente-button-back .cliente-button-text {
+    display: none;
+  }
+}

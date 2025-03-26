@@ -1,0 +1,24 @@
+.home-container{
+    height: 100vh;
+}
+
+.home-menu{
+    height: 80px;
+    background-color: #0d113d;
+}
+
+.home-table{
+    height: 80%;
+}
+
+@media (max-width: 768px) {   
+
+  .home-menu {
+    height: 70px;
+  }
+
+  .home-table {
+    background-color: #fff;
+    height: 100%;
+  }
+}

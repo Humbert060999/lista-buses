@@ -1,0 +1,63 @@
+.menu-container-mobile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.button-menu-mobile {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  margin-left: 3%;
+}
+
+.button-menu-mobile:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.icon-menu-mobile {
+  font-size: 35px;
+}
+
+.menu-options-mobile {
+  background-color: transparent;
+  color: #fff;
+}
+
+.menu-options-mobile .menu-mobile-option:hover {
+  background-color: #333; /* Cambia el color de fondo al pasar el mouse */
+  color: #fff; /* Asegura que las letras sigan siendo blancas */
+}
+
+.menu-options-mobile .ant-menu-item-selected {
+  background-color: #444; /* Color cuando está seleccionado */
+}
+
+.custom-close-icon {
+  color: #fff;
+  font-size: 30px;
+}
+
+.menu-mobile-icon {
+  height: 80px;
+  filter: invert(100%) brightness(2);
+  
+}
+
+.menu-icon-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-mobile-logo-empresa{
+  height: 70%;
+  filter: invert(100%);
+  margin-right: 5%;
+}
+
+
+

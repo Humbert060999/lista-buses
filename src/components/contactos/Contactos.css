@@ -1,0 +1,16 @@
+.contactos-container {
+  background-color: #0d113d;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.contactos-menu {
+  height: 80px;
+}
+
+.contactos-informacion {
+  background-color: #fff;
+  height: 100%;
+}

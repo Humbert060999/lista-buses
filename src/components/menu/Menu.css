@@ -1,0 +1,26 @@
+.menu-container {
+  height: 100%;
+  display: flex;
+}
+
+.menu-options {
+  background-color: #112444;
+  justify-content: end;
+  align-items: center;
+  height: 100%;
+}
+
+.menu-logo-empresa {
+  height: 85%;
+  width: auto;
+  filter: invert(100%);
+  margin-right: 51%;
+  margin-left: 3%;
+  margin-top: 0.3%;
+}
+
+.menu-title-options{
+  display: flex;
+  background-color: #112444;
+  width: 100%;
+}

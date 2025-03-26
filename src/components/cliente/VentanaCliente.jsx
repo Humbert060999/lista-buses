@@ -1,7 +1,7 @@
 import "./VentanaCliente.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import ConvertirPDF from "../convertPDF/ConvertirPDF";
 import {
   Input,
@@ -59,7 +59,7 @@ export default function VentanaCliente() {
             title="Esta seguro de eliminar ?"
             onConfirm={() => handleDelete(record.key)}
           >
-            <a>Eliminar</a>
+            <Button type="link">Eliminar</Button>
           </Popconfirm>
         ) : null,
     },

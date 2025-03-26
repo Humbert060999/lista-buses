@@ -104,666 +104,661 @@ const styles = StyleSheet.create({
   },
 });
 
-const exampleData = [
-  {
-    number: 1, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 2, // N°
-    nombre: "Ana", // NOMBRE
-    apellido: "García", // APELLIDO
-    nac: "ES", // NAC
-    ci: "87654321", // CI
-    fechaNac: "1985-10-22", // FECHA NAC
-    origen: "Barcelona", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Roma", // DESTINO
-  },
-  {
-    number: 3, // N°
-    nombre: "Carlos", // NOMBRE
-    apellido: "Sánchez", // APELLIDO
-    nac: "MX", // NAC
-    ci: "23456789", // CI
-    fechaNac: "1978-03-30", // FECHA NAC
-    origen: "México", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "Londres", // DESTINO
-  },
-  {
-    number: 4, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva ", // DESTINO
-  },
-  {
-    number: 5, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva ", // DESTINO
-  },
-  {
-    number: 6, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva ", // DESTINO
-  },
-  {
-    number: 7, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 8, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 9, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva ", // DESTINO
-  },
-  {
-    number: 10, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva ", // DESTINO
-  },
-  {
-    number: 11, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva ", // DESTINO
-  },
-  {
-    number: 13, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva ", // DESTINO
-  },
-  {
-    number: 14, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva ", // DESTINO
-  },
-  {
-    number: 15, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 16, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 17, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 18, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 19, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 20, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 21, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 22, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 23, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 24, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 25, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 26, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 27, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 28, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 29, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 30, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 31, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 32, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 33, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 34, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 35, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 36, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 37, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 38, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 39, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 40, // N°
-    nombre: "María", // NOMBRE
-    apellido: "Lopez", // APELLIDO
-    nac: "US", // NAC
-    ci: "34567890", // CI
-    fechaNac: "1992-07-18", // FECHA NAC
-    origen: "Los Ángeles", // ORIGEN
-    sexo: "F", // SEXO
-    destino: "Nueva", // DESTINO
-  },
-  {
-    number: 41, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 42, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 43, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 44, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 45, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 46, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 47, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 48, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 49, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 50, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 51, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 52, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 53, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 54, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 55, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 56, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 57, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 58, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 59, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-  {
-    number: 60, // N°
-    nombre: "HUMBERTO HUMBERTO", // NOMBRE
-    apellido: "LUCANA MAMANI", // APELLIDO
-    nac: "CBBA", // NAC
-    ci: "12714653", // CI
-    fechaNac: "06-09-1999", // FECHA NAC
-    origen: "CBBA", // ORIGEN
-    sexo: "M", // SEXO
-    destino: "IQUIQUE", // DESTINO
-  },
-];
+// const exampleData = [
+//   {
+//     number: 1, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 2, // N°
+//     nombre: "Ana", // NOMBRE
+//     apellido: "García", // APELLIDO
+//     nac: "ES", // NAC
+//     ci: "87654321", // CI
+//     fechaNac: "1985-10-22", // FECHA NAC
+//     origen: "Barcelona", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Roma", // DESTINO
+//   },
+//   {
+//     number: 3, // N°
+//     nombre: "Carlos", // NOMBRE
+//     apellido: "Sánchez", // APELLIDO
+//     nac: "MX", // NAC
+//     ci: "23456789", // CI
+//     fechaNac: "1978-03-30", // FECHA NAC
+//     origen: "México", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "Londres", // DESTINO
+//   },
+//   {
+//     number: 4, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva ", // DESTINO
+//   },
+//   {
+//     number: 5, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva ", // DESTINO
+//   },
+//   {
+//     number: 6, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva ", // DESTINO
+//   },
+//   {
+//     number: 7, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 8, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 9, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva ", // DESTINO
+//   },
+//   {
+//     number: 10, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva ", // DESTINO
+//   },
+//   {
+//     number: 11, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva ", // DESTINO
+//   },
+//   {
+//     number: 13, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva ", // DESTINO
+//   },
+//   {
+//     number: 14, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva ", // DESTINO
+//   },
+//   {
+//     number: 15, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 16, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 17, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 18, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 19, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 20, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 21, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 22, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 23, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 24, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 25, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 26, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 27, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 28, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 29, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 30, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 31, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 32, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 33, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 34, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 35, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 36, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 37, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 38, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 39, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 40, // N°
+//     nombre: "María", // NOMBRE
+//     apellido: "Lopez", // APELLIDO
+//     nac: "US", // NAC
+//     ci: "34567890", // CI
+//     fechaNac: "1992-07-18", // FECHA NAC
+//     origen: "Los Ángeles", // ORIGEN
+//     sexo: "F", // SEXO
+//     destino: "Nueva", // DESTINO
+//   },
+//   {
+//     number: 41, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 42, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 43, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 44, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 45, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 46, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 47, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 48, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 49, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 50, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 51, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 52, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 53, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 54, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 55, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 56, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 57, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 58, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 59, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+//   {
+//     number: 60, // N°
+//     nombre: "HUMBERTO HUMBERTO", // NOMBRE
+//     apellido: "LUCANA MAMANI", // APELLIDO
+//     nac: "CBBA", // NAC
+//     ci: "12714653", // CI
+//     fechaNac: "06-09-1999", // FECHA NAC
+//     origen: "CBBA", // ORIGEN
+//     sexo: "M", // SEXO
+//     destino: "IQUIQUE", // DESTINO
+//   },
+// ];
 
 export default function ConvertirPDF({ data, dataPasajeros }) {
   const [listPasajeros, setListPasajeros] = useState([]);
   useEffect(() => {
-    console.log("Los datos recibidos son: ", data);
-    console.log(
-      "Los datos de los pasajeros que se resiven son: ",
-      dataPasajeros
-    );
     convertirListaPasajeros();
   }, [data]);
 

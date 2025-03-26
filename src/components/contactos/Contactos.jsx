@@ -1,7 +1,7 @@
 import "./Contactos.css";
 
 import { useState, useEffect } from "react";
-import MenuMobile from "../MenuMobile/MenuMobile";
+import MenuMobile from "../menuMobile/MenuMobile";
 import Menu from "../Menu/Menu"
 
 export default function Contactos() {

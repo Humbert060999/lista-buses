@@ -1,11 +1,21 @@
 .menu-container {
   height: 100%;
+  position: fixed;
+  width: 100%;
+  height: 85px;
+  z-index: 1000;
+}
+
+.menu-title-options {
+  background-color: #112444;
   display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 100%;
 }
 
 .menu-options {
   background-color: #112444;
-  justify-content: end;
   align-items: center;
   height: 100%;
 }
@@ -14,13 +24,4 @@
   height: 85%;
   width: auto;
   filter: invert(100%);
-  margin-right: 51%;
-  margin-left: 3%;
-  margin-top: 0.3%;
-}
-
-.menu-title-options{
-  display: flex;
-  background-color: #112444;
-  width: 100%;
 }

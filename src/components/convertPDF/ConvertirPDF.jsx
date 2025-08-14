@@ -757,27 +757,18 @@ const styles = StyleSheet.create({
 // ];
 
 export default function ConvertirPDF({ data, dataPasajeros }) {
-  const [listPasajeros, setListPasajeros] = useState([]);
-  useEffect(() => {
-    convertirListaPasajeros();
-  }, [data]);
-
-  const convertirListaPasajeros = () => {
-    for (let i = 0; i < dataPasajeros.length; i++) {
-      const nuevoPasajero = {
-        number: i + 1,
-        nombre: dataPasajeros[i].nombre,
-        apellido: dataPasajeros[i].apellido,
-        nac: "CBBA",
-        ci: dataPasajeros[i].ci,
-        fechaNac: dataPasajeros[i].fechaNacimiento,
-        origen: data.origen,
-        sexo: dataPasajeros[i].sexo === 1 ? "M" : "F",
-        destino: data.destino,
-      };
-      setListPasajeros((prevData) => [...prevData, nuevoPasajero]);
-    }
-  };
+  // Generar lista de pasajeros directamente
+  const listPasajeros = (dataPasajeros || []).map((pasajero, i) => ({
+    number: i + 1,
+    nombre: pasajero.nombre,
+    apellido: pasajero.apellido,
+    nac: "CBBA",
+    ci: pasajero.ci,
+    fechaNac: pasajero.fechaNacimiento,
+    origen: data?.origen || "",
+    sexo: pasajero.sexo === 1 ? "M" : "F",
+    destino: data?.destino || "",
+  }));
 
   return (
     <Document>

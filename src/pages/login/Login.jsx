@@ -1,11 +1,11 @@
 import "./Login.css";
 import { Input, Form, Button, message } from "antd";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import IconoLogin from "../../assets/icono-usuario.png";
 
 export default function Login() {
   const [form] = Form.useForm();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const users = [
     { username: "admin", password: "12345" },
@@ -21,7 +21,7 @@ export default function Login() {
 
     if (user) {
       navigate("/inicio");
-      message.success("Inicio de sesión correctamente ")
+      message.success("Inicio de sesión correctamente ");
     } else {
       message.error("Usuario o contraseña incorrectos");
     }
@@ -49,7 +49,7 @@ export default function Login() {
               },
             ]}
           >
-            <Input placeholder="Ingrese el nombre de usuario" />
+            <Input placeholder="Ingrese el nombre de usuario" autoFocus />
           </Form.Item>
           <Form.Item
             label="Contraseña"
@@ -60,7 +60,7 @@ export default function Login() {
           >
             <Input.Password placeholder="Ingrese la contraseña" />
           </Form.Item>
-          <Button type="primary" block  htmlType="submit">
+          <Button type="primary" block htmlType="submit">
             Ingresar
           </Button>
         </div>

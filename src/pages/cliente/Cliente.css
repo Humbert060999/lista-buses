@@ -1,15 +1,12 @@
-
-
-.cliente-menu{
-   height: 80px;
-   width: 99vw;
-   background-color: #0d113d;
+.cliente-menu {
+  height: 85px;
+  width: 99vw;
+  margin-top: 0;
 }
 
-@media (max-width: 768px) {  
-   .cliente-menu{
-      height: 70px;
-      width: 100vw;
-   }
- }
-
+@media (max-width: 768px) {
+  .cliente-menu {
+    height: 70px;
+    width: 100vw;
+  }
+}

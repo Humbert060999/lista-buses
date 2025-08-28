@@ -149,7 +149,7 @@ export default function TablaPlanillas() {
       const datosViaje = viajes.find((v) => v.id === id);
 
       // 2. Traer pasajeros desde json-server
-      const res = await fetch(`http://localhost:3001/pasajeros?idViaje=${id}`);
+      const res = await fetch(`${API_URL}/pasajeros?idViaje=${id}`);
       const pasajerosViaje = await res.json();
 
       if (pasajerosViaje.length === 0) {
@@ -183,8 +183,9 @@ export default function TablaPlanillas() {
     setViajeSeleccionado(id); // guardamos a qué viaje pertenece
 
     // 1. Llamar a la BD para obtener pasajeros del viaje
-    const res = await fetch(`http://localhost:3001/pasajeros?idViaje=${id}`);
+    const res = await fetch(`${API_URL}/pasajeros?idViaje=${id}`);
     const pasajerosViaje = await res.json();
+
 
     // 2. Construir lista de asientos "limpia" y marcar vendidos
     const nuevosAsientos = Array.from({ length: 60 }, (_, i) => {
@@ -281,12 +282,11 @@ export default function TablaPlanillas() {
       };
 
       // Enviar al json-server
-      await fetch("http://localhost:3001/pasajeros", {
+      await fetch(`${API_URL}/pasajeros`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(pasajero),
       });
-
       message.success(`Pasajero del asiento ${pasajero.nroAsiento} añadido correctamente`);
 
       formPasajeros.resetFields();

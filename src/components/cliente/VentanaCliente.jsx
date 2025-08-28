@@ -240,7 +240,7 @@ export default function VentanaCliente() {
 
       // Guardar en json-server (crear o actualizar)
       if (datosViaje) {
-        await axios.put(`${API_URLL}/viajes/${idFinal}`, datosViajeNuevo);
+        await axios.put(`${API_URL}/viajes/${idFinal}`, datosViajeNuevo);
         message.success("El viaje se actualizó correctamente");
       } else {
         await axios.post(`${API_URL}/viajes`, datosViajeNuevo);

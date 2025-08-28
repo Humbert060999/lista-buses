@@ -40,7 +40,6 @@ h2 {
   width: 96.7%;
   padding: 5px;
   font-size: 16px;
-  border: 1px solid #d9d9d9;
   border-radius: 6px;
   background-color: #fff;
   color: #3d3d3dd9;
@@ -88,6 +87,7 @@ h2 {
 
 .form-pasajeros-container {
   max-width: 30%;
+  top: 8%;
 }
 
 .modal-confirm,
@@ -105,14 +105,16 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  padding: 20px 0;
 }
 
 .tabla-pasajeros {
-  background-color: #ffff;
+  background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.456);
   border-radius: 15px;
   width: 80%;
+  max-width: 1000px;
+  min-height: 300px;
 }
 
 .datos-bus-dos {
@@ -180,10 +182,35 @@ h2 {
   text-decoration: none;
 }
 
+.group-nacionalidad-destino {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.input-fecha-cliente {
+  width: 95%;
+  padding: 4px 11px; /* padding de Ant Design */
+  font-size: 14px;
+  line-height: 1.5715;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.input-fecha-cliente:focus {
+  border-color: #40a9ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.tabla-pasajeros .ant-table-cell {
+  white-space: nowrap; /* evita que corte palabras */
+}
+
 @media only screen and (max-width: 1080px) {
   .formulario-cliente {
     padding: 5%;
-    border-radius: 10px;
   }
 
   .datos-viaje {
@@ -220,11 +247,29 @@ h2 {
     min-height: 60vh;
   }
 
-  .cliente-button-back .cliente-button-text {
-    display: none;
-  }
-
   .datos-bus-button-finalizar {
     margin-top: 5%;
+  }
+
+  .form-pasajeros-container {
+    top: 0%;
+  }
+
+  .main-steps {
+    margin: 0;
+  }
+
+  .group-nacionalidad-destino {
+    display: flex;
+    flex-direction: column;
+  }
+  .tabla-pasajeros {
+    width: 95%;         /* casi todo el ancho en móvil */
+    min-height: 200px;  /* menos alto en móvil */
+    border-radius: 8px; /* bordes más suaves */
+  }
+
+  .cliente-tabla-pasajeros {
+    padding: 10px 0;    /* menos padding en móvil */
   }
 }

@@ -1,19 +1,128 @@
+/* Contenedor general */
 .tabla-container {
   width: 95%;
   margin-left: 2%;
   margin-top: 2%;
 }
 
-.tabla-button-nuevo{
+.tabla-button-nuevo {
   width: 95%;
   margin: 2%;
   display: flex;
   justify-content: flex-end;
 }
 
+/* Contenedor de los asientos */
+.bus-container {
+  display: grid;
+  gap: 10px;
+  justify-content: center;
+  padding: 20px;
+  grid-template-columns: repeat(4, 50px);
+  /* móvil por defecto */
+  grid-auto-flow: row;
+  /* llenar por filas en móvil */
+}
+
+/* Cada asiento */
+.asiento {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.1s;
+}
+
+.asiento:hover {
+  transform: scale(1.1);
+}
+
+/* Estados de los asientos */
+.asiento.disponible {
+  background-color: #3498db;
+  /* azul */
+}
+
+.asiento.seleccionado {
+  background-color: #f1c40f;
+  /* amarillo */
+}
+
+.asiento.reservado,
+.asiento.vendido {
+  background-color: #e74c3c;
+  /* rojo */
+  cursor: not-allowed;
+}
+
+/* Contenedor del modal de pasajeros */
+.form-pasajeros-container {
+  max-width: 30%;
+  top: 8%;
+}
+
+/* Inputs de fecha con máscara */
+.input-fecha-cliente {
+  width: 95%;
+  padding: 4px 11px; /* padding de Ant Design */
+  font-size: 14px;
+  line-height: 1.5715;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.input-fecha-cliente:focus {
+  border-color: #40a9ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+/* Grupo nacionalidad y destino lado a lado en escritorio */
+.group-nacionalidad-destino {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* MÓVIL: hasta 768px */
 @media (max-width: 768px) {
-  .tabla-buttons {
-    display: flex;
-    flex-direction: column;
+  .bus-container {
+    grid-template-columns: repeat(4, 50px);
+    /* 4 columnas horizontales */
+    justify-content: center;
+    padding: 10px;
+    grid-auto-flow: row;
+    /* llenar por filas */
+  }
+}
+
+/* ESCRITORIO: más de 768px */
+@media (min-width: 769px) {
+  .bus-container {
+    width: 900px;
+    /* ancho fijo para modal */
+    grid-template-rows: repeat(4, 50px);
+    /* 4 filas */
+    grid-auto-flow: column;
+    /* llenar por columnas */
+    justify-content: center;
+    padding: 20px;
+  }
+}
+
+/*Responsive para pantallas pequeñas */
+@media only screen and (max-width: 1080px) {
+  .form-pasajeros-container {
+    top: 0%;          /* centrado más arriba en móvil */
+    max-width: 95%;   /* casi todo el ancho */
+  }
+
+  .group-nacionalidad-destino {
+    flex-direction: column; /* apilar campos en lugar de en fila */
   }
 }

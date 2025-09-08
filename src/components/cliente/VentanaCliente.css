@@ -108,14 +108,7 @@ h2 {
   padding: 20px 0;
 }
 
-.tabla-pasajeros {
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.456);
-  border-radius: 15px;
-  width: 80%;
-  max-width: 1000px;
-  min-height: 300px;
-}
+
 
 .datos-bus-dos {
   display: flex;
@@ -190,7 +183,8 @@ h2 {
 
 .input-fecha-cliente {
   width: 95%;
-  padding: 4px 11px; /* padding de Ant Design */
+  padding: 4px 11px;
+  /* padding de Ant Design */
   font-size: 14px;
   line-height: 1.5715;
   border: 1px solid #d9d9d9;
@@ -204,13 +198,28 @@ h2 {
   box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
 }
 
-.tabla-pasajeros .ant-table-cell {
-  white-space: nowrap; /* evita que corte palabras */
+
+
+.group-input-list-drives {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.inputs-drivers {
+  width: 45%;
+}
+
+.list-drivers {
+  width: 50%;
+  padding-top: 2.5%;
 }
 
 @media only screen and (max-width: 1080px) {
   .formulario-cliente {
     padding: 5%;
+    margin: 0 5% 10% 5%;
+
   }
 
   .datos-viaje {
@@ -263,13 +272,21 @@ h2 {
     display: flex;
     flex-direction: column;
   }
-  .tabla-pasajeros {
-    width: 95%;         /* casi todo el ancho en móvil */
-    min-height: 200px;  /* menos alto en móvil */
-    border-radius: 8px; /* bordes más suaves */
-  }
+
+
 
   .cliente-tabla-pasajeros {
-    padding: 10px 0;    /* menos padding en móvil */
+    padding: 10px 0;
+    /* menos padding en móvil */
+  }
+
+  .group-input-list-drives {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .inputs-drivers,
+  .list-drivers {
+    width: 100%;
   }
 }

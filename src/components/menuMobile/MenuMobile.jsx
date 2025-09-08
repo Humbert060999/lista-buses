@@ -70,7 +70,7 @@ export default function MenuMobile() {
             <NavLink
               to="/formulario"
               onClick={closeDrawer}
-              style={{ color: "#fff" }} 
+              style={{ color: "#fff" }}
             >
               <b>Nueva plantilla</b>
             </NavLink>
@@ -107,7 +107,6 @@ export default function MenuMobile() {
 
   const onClick = (e) => {
     setEstadoOptionMenu(e.key);
-    console.log("El menu seleccionado es: ", e.key);
   };
 
   return (

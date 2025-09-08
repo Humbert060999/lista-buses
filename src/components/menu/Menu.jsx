@@ -69,7 +69,6 @@ export default function MenuM() {
 
   const onClick = (e) => {
     setEstadoOptionMenu(e.key);
-    console.log("El menu seleccionado es: ", e.key);
   };
 
   return (

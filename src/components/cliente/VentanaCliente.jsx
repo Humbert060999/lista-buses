@@ -1,8 +1,6 @@
 import "./VentanaCliente.css";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { PDFDownloadLink, pdf, PDFViewer } from "@react-pdf/renderer";
-import ConvertirPDF from "../convertPDF/ConvertirPDF";
 import {
   Input,
   Form,
@@ -13,12 +11,10 @@ import {
   message,
   Table,
   Popconfirm,
-  Steps,
+  List,
 } from "antd";
 import {
   RollbackOutlined,
-  DownloadOutlined,
-  PrinterOutlined,
   DeleteOutlined,
   InboxOutlined,
 } from "@ant-design/icons";
@@ -26,55 +22,20 @@ import InputMask from "react-input-mask";
 import axios from "axios";
 import { API_URL } from "../../api";
 
-const { confirm } = Modal;
-
 export default function VentanaCliente() {
-
   const navigate = useNavigate();
-  const [showDownloadLink, setShowDownloadLink] = useState(false);
-  const [data, setData] = useState([]);
   const [form] = Form.useForm();
   const [form2] = Form.useForm();
-  const [licencia, setLicencia] = useState("");
   const [value, setValue] = useState(1);
   const [listPasajeros, setListPasajeros] = useState([]);
   const [scrollY, setScrollY] = useState(450);
   const [contadorKey, setContadorKey] = useState(1);
-  const [current, setCurrent] = useState(0);
-
+  const [listaConductores, setListaConductores] = useState([]);
+  const [viewModalPassengers, setViewModalPassengers] = useState(false);
   const location = useLocation();
 
   const datosViaje = location.state?.viaje || null;
-  const modo = datosViaje ? "editar" : "crear";
-
-  const columsTablePasajeros = [
-    { title: "CI", dataIndex: "ci", key: "ci", width: 75 },
-    { title: "Nombre", dataIndex: "nombre", key: "nombre", width: 100 },
-    { title: "Apellidos", dataIndex: "apellido", key: "apellido", width: 100 },
-    {
-      title: "Acción",
-      key: "accion",
-      width: 120,
-      render: (_, record) =>
-        listPasajeros.length > 0 ? (
-          <Popconfirm
-            title="¿Está seguro de eliminar?"
-            okText="Sí"
-            cancelText="Cancelar"
-            onConfirm={() => handleDeletePasajeros(record.key)}
-          >
-            <Button type="link" danger icon={<DeleteOutlined />}>
-              Eliminar
-            </Button>
-          </Popconfirm>
-        ) : null,
-    },
-  ];
-
-  const handleDeletePasajeros = (key) => {
-    setListPasajeros((prev) => prev.filter((item) => item.key !== key));
-    message.success("El pasajero fue eliminado");
-  };
+  const conductoresDesdeState = location.state?.listaConductores || [];
 
   useEffect(() => {
     form2.setFieldsValue({ sexo: 1 });
@@ -82,9 +43,25 @@ export default function VentanaCliente() {
     // Si viene en modo edición, llenar el formulario
     if (datosViaje) {
       form.setFieldsValue(datosViaje);
+
+      // Usar listaConductores pasada por state si existe
+      if (conductoresDesdeState.length > 0) {
+        setListaConductores(conductoresDesdeState);
+      } else {
+        // Reconstruir lista de conductores desde datosViaje
+        const conductores = [];
+        for (let i = 1; i <= 4; i++) {
+          const license = datosViaje[`license${i}`];
+          const nombres = datosViaje[`nombresConductor${i}`];
+          const apellidos = datosViaje[`apellidosConductor${i}`];
+          if (license && nombres && apellidos) {
+            conductores.push({ license, nombres, apellidos });
+          }
+        }
+        setListaConductores(conductores);
+      }
     }
 
-    // Función para actualizar el scroll según el tamaño de la pantalla
     const handleResize = () => {
       const width = window.innerWidth;
 
@@ -101,15 +78,14 @@ export default function VentanaCliente() {
     };
   }, [form2, form, listPasajeros, datosViaje]);
 
-
-  const origenes = [
+  const origins = [
     {
       value: "Cochabamba",
       label: "Cochabamba",
     },
     {
-      value: "Santa Cruz",
-      label: "Santa Cruz",
+      value: "Oruro",
+      label: "Oruro",
     },
     {
       value: "Iquique",
@@ -117,14 +93,10 @@ export default function VentanaCliente() {
     },
   ];
 
-  const destinos = [
+  const destination = [
     {
-      value: "Cochabamba",
-      label: "Cochabamba",
-    },
-    {
-      value: "Santa Cruz",
-      label: "Santa Cruz",
+      value: "Oruro",
+      label: "Oruro",
     },
     {
       value: "Iquique",
@@ -133,12 +105,16 @@ export default function VentanaCliente() {
   ];
 
   const listaDatos = [
-    { licencia: "12345", nombres: "Juan", apellidos: "Pérez" },
-    { licencia: "67890", nombres: "María", apellidos: "Gómez" },
-    { licencia: "12714653", nombres: "HUMBERTO", apellidos: "LUCANA MAMANI" },
+    {
+      license: "123456",
+      nombres: "Juan Alejandro",
+      apellidos: "Pérez Marquina",
+    },
+    { license: "987654", nombres: "Andres ", apellidos: "Gómez Quinteros" },
+    { license: "12714653", nombres: "Humberto", apellidos: "Lucana Mamani" },
   ];
 
-  const listaCamiones = [
+  const listTrucks = [
     {
       placa: "ABC123",
       resolucionChilena: "Res-001",
@@ -174,22 +150,20 @@ export default function VentanaCliente() {
     },
   ];
 
-  const listaCamionesSelect = [
+  const listSelectTruck = [
     { value: "ABC123", label: "ABC123" },
     { value: "DEF456", label: "DEF456" },
     { value: "2357BKA", label: "2357BKA" },
   ];
 
-  // Buscamos el ultimo id para seguir el orden de los indentificadores
   // Función que devuelve una promesa con el nuevo ID
   const buscarUltimoId = async () => {
     const res = await axios.get(`${API_URL}/viajes`);
     const viajes = res.data;
 
-
     let ultimoId = 0;
     if (viajes.length > 0) {
-      const numeros = viajes.map(v => parseInt(v.id.split("-")[1], 10));
+      const numeros = viajes.map((v) => parseInt(v.id.split("-")[1], 10));
       ultimoId = Math.max(...numeros);
     }
 
@@ -197,39 +171,36 @@ export default function VentanaCliente() {
     return nuevoId;
   };
 
-  const registrarDatos = async (values) => {
+  const saveData = async (values) => {
     try {
-      // Fecha actual en formato dd-mm-aaaa
-      const fechaHoy = new Date();
-      const fechaActualFormateada = fechaHoy.toLocaleDateString("es-ES");
+      // Validar que haya al menos un conductor
+      if (!listaConductores || listaConductores.length === 0) {
+        message.error("Debe añadir al menos un conductor antes de guardar");
+        return;
+      }
 
-      // Fecha de vencimiento formateada (siempre dd-mm-aaaa)
-      const fechaVenceCamionFormateada = values.venceCamion
-        ? values.venceCamion.split("-").reverse().join("-")
+      // Fecha actual en formato dd-mm-aaaa
+      const fechaHoy = new Date().toISOString().split("T")[0];
+
+      const fechaVenceCamion = values.venceCamion
+        ? new Date(values.venceCamion).toISOString().split("T")[0]
         : "";
 
+      console.log("fecha cenve, ", values.venceCamion);
       // Si es crear → buscar nuevo ID
       let idFinal = datosViaje ? datosViaje.id : await buscarUltimoId();
 
-      // Construcción del objeto de datos
-      const datosViajeNuevo = {
+      // Construcción base del objeto de datos
+      let datosViajeNuevo = {
         id: idFinal,
         origen: values.origen,
         destino: values.destino,
         placa: values.placa,
-        fechaViaje: datosViaje ? values.fechaViaje : fechaActualFormateada,
+        fechaViaje: datosViaje ? values.fechaViaje : fechaHoy,
         horaViaje: values.horaViaje,
 
-        licencia1: values.licencia1,
-        nombresConductor1: values.nombresConductor1,
-        apellidosConductor1: values.apellidosConductor1,
-
-        licencia2: values.licencia2,
-        nombresConductor2: values.nombresConductor2,
-        apellidosConductor2: values.apellidosConductor2,
-
         resolucionChilena: values.resolucionChilena,
-        venceCamion: fechaVenceCamionFormateada,
+        venceCamion: fechaVenceCamion,
         modeloCamion: values.modeloCamion,
         anioCamion: values.anioCamion,
         polizaCamion: values.polizaCamion,
@@ -237,6 +208,14 @@ export default function VentanaCliente() {
         chasisCamion: values.chasisCamion,
         motorCamion: values.motorCamion,
       };
+
+      // 🔹 Añadir los conductores de forma dinámica (licencia1, nombresConductor1, etc.)
+      listaConductores.forEach((conductor, index) => {
+        const num = index + 1;
+        datosViajeNuevo[`licencia${num}`] = conductor.license;
+        datosViajeNuevo[`nombresConductor${num}`] = conductor.nombres;
+        datosViajeNuevo[`apellidosConductor${num}`] = conductor.apellidos;
+      });
 
       // Guardar en json-server (crear o actualizar)
       if (datosViaje) {
@@ -255,68 +234,37 @@ export default function VentanaCliente() {
     }
   };
 
-
-
-  const handleLicenciaChange1 = (e) => {
-    const valor = e.target.value;
-    setLicencia(valor);
-
-    // Buscar si la licencia existe en la lista
-    const datos = listaDatos.find((item) => item.licencia === valor);
+  const handleLicenseChange = (e) => {
+    const ci = e.target.value;
+    const datos = listaDatos.find((item) => item.license === ci);
 
     if (datos) {
-      // Si se encuentra, llenar los otros campos usando form.setFieldValue
       form.setFieldsValue({
-        nombresConductor1: datos.nombres,
-        apellidosConductor1: datos.apellidos,
+        namesDriver: datos.nombres,
+        lastNameDriver: datos.apellidos,
       });
     } else {
-      // Si no se encuentra, limpiar los campos
       form.setFieldsValue({
-        nombresConductor1: "",
-        apellidosConductor1: "",
+        namesDriver: "",
+        lastNameDriver: "",
       });
     }
   };
 
-  const handleLicenciaChange2 = (e) => {
-    const valor = e.target.value;
-    setLicencia(valor);
-
-    // Buscar si la licencia existe en la lista
-    const datos = listaDatos.find((item) => item.licencia === valor);
-
-    if (datos) {
-      // Si se encuentra, llenar los otros campos usando form.setFieldValue
+  const searchPlateTruck = (e) => {
+    const data = listTrucks.find((item) => item.placa === e);
+    if (data) {
       form.setFieldsValue({
-        nombresConductor2: datos.nombres,
-        apellidosConductor2: datos.apellidos,
+        modeloCamion: data.modelo,
+        polizaCamion: data.polizaSeguro,
+        resolucionChilena: data.resolucionChilena,
+        vtoCamion: data.VTO,
+        venceCamion: data.vence,
+        chasisCamion: data.chasis,
+        motorCamion: data.motor,
+        anioCamion: data.anio,
       });
     } else {
-      // Si no se encuentra, limpiar los campos
-      form.setFieldsValue({
-        nombresConductor2: "",
-        apellidosConductor2: "",
-      });
-    }
-  };
-
-  const buscarPlacaCamiones = (e) => {
-    const datos = listaCamiones.find((item) => item.placa === e);
-    if (datos) {
-      // Si se encuentra, llenar los otros campos usando form.setFieldValue
-      form.setFieldsValue({
-        modeloCamion: datos.modelo,
-        polizaCamion: datos.polizaSeguro,
-        resolucionChilena: datos.resolucionChilena, // Incluye el campo de resolución
-        vtoCamion: datos.VTO,
-        venceCamion: datos.vence,
-        chasisCamion: datos.chasis,
-        motorCamion: datos.motor,
-        anioCamion: datos.anio,
-      });
-    } else {
-      // Si no se encuentra, limpiar los campos
       form.setFieldsValue({
         modeloCamion: "",
         polizaCamion: "",
@@ -325,19 +273,17 @@ export default function VentanaCliente() {
         venceCamion: "",
         chasisCamion: "",
         motorCamion: "",
-        anioCamion: "", // Cambiado de año a anio
+        anioCamion: "",
       });
     }
   };
 
-  const [viewModal, setViewModal] = useState(false);
-
   const viewFormCustomer = () => {
-    setViewModal(true);
+    setViewModalPassengers(true);
   };
 
   const closeModal = () => {
-    setViewModal(false);
+    setViewModalPassengers(false);
   };
 
   const showCloseConfirm = () => {
@@ -347,13 +293,10 @@ export default function VentanaCliente() {
   };
 
   const onChange = (e) => {
-    console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
 
   const guardarDatosPasajeros = (date) => {
-    console.log("Datos insertados:", date);
-
     const pasajeroConKey = {
       ...date,
       key: contadorKey,
@@ -369,382 +312,86 @@ export default function VentanaCliente() {
   };
 
   const viewHome = () => {
-    console.log("volver al inicio")
     navigate("/inicio");
   };
 
-  const imprimirDocumento = async () => {
-    try {
-      // Hacer copias de los datos actuales para asegurar que estén completos
-      const datosActuales = JSON.parse(JSON.stringify(data));
-      const pasajerosActuales = JSON.parse(JSON.stringify(listPasajeros));
+  // const imprimirDocumento = async () => {
+  //   try {
+  //     // Hacer copias de los datos actuales para asegurar que estén completos
+  //     const datosActuales = JSON.parse(JSON.stringify(data));
+  //     const pasajerosActuales = JSON.parse(JSON.stringify(listPasajeros));
 
-      // Crear instancia del PDF
-      const pdfInstance = pdf(
-        <ConvertirPDF data={datosActuales} dataPasajeros={pasajerosActuales} />
-      );
+  //     // Crear instancia del PDF
+  //     const pdfInstance = pdf(
+  //       <ConvertirPDF data={datosActuales} dataPasajeros={pasajerosActuales} />
+  //     );
 
-      // Generar el blob del PDF
-      const blob = await pdfInstance.toBlob();
-      const blobUrl = URL.createObjectURL(blob);
+  //     // Generar el blob del PDF
+  //     const blob = await pdfInstance.toBlob();
+  //     const blobUrl = URL.createObjectURL(blob);
 
-      // Abrir nueva ventana para imprimir
-      const printWindow = window.open(blobUrl, "_blank");
+  //     // Abrir nueva ventana para imprimir
+  //     const printWindow = window.open(blobUrl, "_blank");
 
-      if (!printWindow) {
-        alert("Por favor, permite ventanas emergentes para imprimir el PDF.");
-        return;
-      }
+  //     if (!printWindow) {
+  //       alert("Por favor, permite ventanas emergentes para imprimir el PDF.");
+  //       return;
+  //     }
 
-      // Cuando la ventana cargue, abrir el diálogo de impresión
-      printWindow.onload = () => {
-        printWindow.focus();
-        printWindow.print();
-      };
-    } catch (error) {
-      console.error("Error generando o imprimiendo el PDF:", error);
-    }
-  };
+  //     // Cuando la ventana cargue, abrir el diálogo de impresión
+  //     printWindow.onload = () => {
+  //       printWindow.focus();
+  //       printWindow.print();
+  //     };
+  //   } catch (error) {
+  //     console.error("Error generando o imprimiendo el PDF:", error);
+  //   }
+  // };
 
   const mostrarErrorFormBus = () => {
     message.warning("Faltan llenar campos obligatorios");
   };
 
-  const steps = [
-    {
-      title: "Formulario del Bus",
-      content: (
-        <>
-          <h2>Formulario de viaje</h2>
-          <Form
-            form={form}
-            layout="vertical"
-            onFinish={registrarDatos}
-            onFinishFailed={mostrarErrorFormBus}
-            className="formulario-cliente"
-          >
-            <div className="linea-con-texto">
-              <span>
-                <b>Datos del viaje</b>
-              </span>
-            </div>
-            <div className="datos-viaje">
-              <div className="datos-viaje-uno">
-                <Form.Item
-                  label="Origen"
-                  name="origen"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Por favor, seleccione el origen",
-                    },
-                  ]}
-                >
-                  <Select
-                    placeholder="Seleccione el origen"
-                    optionFilterProp="label"
-                    options={origenes}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Destino"
-                  name="destino"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Por favor, seleccione el destino",
-                    },
-                  ]}
-                >
-                  <Select
-                    placeholder="Seleccione el destino"
-                    optionFilterProp="label"
-                    options={destinos}
-                  />
-                </Form.Item>
-              </div>
-              <div className="datos-viaje-dos">
-                <Form.Item label="Fecha de viaje" name="fechaViaje">
-                  <input
-                    type="date"
-                    id="fecha"
-                    placeholder="Seleccione la fecha de viaje"
-                    className="input-estilo"
-                    defaultValue={new Date().toISOString().split("T")[0]}
-                    readOnly
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Hora de salida"
-                  name="horaViaje"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Por favor, seleccione la hora de salida",
-                    },
-                  ]}
-                >
-                  <input type="time" id="hora" className="input-estilo" />
-                </Form.Item>
-              </div>
-            </div>
-            <div class="linea-con-texto">
-              <span>
-                <b>Datos de los conductores</b>
-              </span>
-            </div>
-            <div className="datos-conductor">
-              <div className="datos-conductor-uno">
-                <Form.Item
-                  label="Licencia del conductor 1"
-                  name="licencia1"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Por favor, ingrese la licencia del conductor 1",
-                    },
-                    {
-                      pattern: /^[0-9]{1,9}$/,
-                      message: "Solo números, máximo 9 dígitos",
-                    },
-                  ]}
-                >
-                  <Input
-                    value={licencia}
-                    onChange={handleLicenciaChange1}
-                    placeholder="Ingrese el número de licencia"
-                    maxLength={9}
-                    inputMode="numeric"
-                    pattern="[0-9]*"
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Nombres del conductor 1"
-                  name="nombresConductor1"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Por favor, ingrese los nombres del conductor 1",
-                    },
-                  ]}
-                >
-                  <Input placeholder="Ingrese los nombres" />
-                </Form.Item>
-                <Form.Item
-                  label="Apellidos del conductor 1"
-                  name="apellidosConductor1"
-                  rules={[
-                    {
-                      required: true,
-                      message:
-                        "Por favor, ingrese los apellidos del conductor 1",
-                    },
-                  ]}
-                >
-                  <Input placeholder="Ingrese los apellidos" />
-                </Form.Item>
-              </div>
-              <div className="datos-conductor-dos">
-                <Form.Item
-                  label="Licencia del conductor 2"
-                  name="licencia2"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Por favor, ingrese la licencia del conductor 2",
-                    },
-                    {
-                      pattern: /^[0-9]{1,9}$/,
-                      message: "Solo números, máximo 9 dígitos",
-                    },
-                  ]}
-                >
-                  <Input
-                    value={licencia}
-                    onChange={handleLicenciaChange2}
-                    placeholder="Ingrese el número de licencia"
-                    maxLength={9}
-                    inputMode="numeric"
-                    pattern="[0-9]*"
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Nombres del conductor 2"
-                  name="nombresConductor2"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Por favor, ingrese los nombres del conductor 2",
-                    },
-                  ]}
-                >
-                  <Input placeholder="Ingrese los nombres" />
-                </Form.Item>
-                <Form.Item
-                  label="Apellidos del conductor 2"
-                  name="apellidosConductor2"
-                  rules={[
-                    {
-                      required: true,
-                      message:
-                        "Por favor, ingrese los apellidos del conductor 2",
-                    },
-                  ]}
-                >
-                  <Input placeholder="Ingrese los apellidos" />
-                </Form.Item>
-              </div>
-            </div>
+  const handleAddConductor = () => {
+    const { license, namesDriver, lastNameDriver } = form.getFieldsValue([
+      "license",
+      "namesDriver",
+      "lastNameDriver",
+    ]);
 
-            <div class="linea-con-texto">
-              <span>
-                <b>Datos del bus</b>
-              </span>
-            </div>
+    if (!license || !namesDriver || !lastNameDriver) {
+      message.error(
+        "Debe completar todos los campos del conductor antes de añadir"
+      );
+      return;
+    }
 
-            <div className="datos-bus">
-              <div className="datos-bus-uno">
-                <Form.Item
-                  label="Placa o Patente N°"
-                  name="placa"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Por favor, ingrese la placa o patente",
-                    },
-                  ]}
-                >
-                  <Select
-                    onChange={buscarPlacaCamiones}
-                    allowClear
-                    placeholder="Seleccione la placa"
-                    options={listaCamionesSelect}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Resolución chilena exenta N°"
-                  name="resolucionChilena"
-                >
-                  <Input readOnly />
-                </Form.Item>
-                <Form.Item label="Vence" name="venceCamion">
-                  <Input readOnly />
-                </Form.Item>
-                <Form.Item label="Modelo" name="modeloCamion">
-                  <Input readOnly />
-                </Form.Item>
-                <Form.Item label="Año" name="anioCamion">
-                  <Input readOnly />
-                </Form.Item>
-              </div>
-              <div className="datos-bus-dos">
-                <Form.Item label="Poliza de seguro" name="polizaCamion">
-                  <Input readOnly />
-                </Form.Item>
-                <Form.Item label="VTO" name="vtoCamion">
-                  <Input readOnly />
-                </Form.Item>
-                <Form.Item label="Chasis" name="chasisCamion">
-                  <Input readOnly />
-                </Form.Item>
-                <Form.Item label="Motor" name="motorCamion">
-                  <Input readOnly />
-                </Form.Item>
-                {/* <div className="datos-bus-button-finalizar">
-                  <Button type="primary" htmlType="submit">
-                    Finalizar
-                  </Button>
-                </div> */}
-              </div>
-            </div>
-          </Form>
-        </>
-      ),
-    },
-    {
-      title: "Lista de Pasajeros",
-      content: (
-        <>
-          {/* Tabla para mostrar la lista de los pasajeros que se van añadiendo */}
-          <div>
-            <h2 style={{ textAlign: "center" }}>Lista de pasajeros</h2>
-            <Button onClick={viewFormCustomer}>Añadir pasajero</Button>
-            <div className="cliente-tabla-pasajeros">
-              <Table
-                columns={columsTablePasajeros}
-                dataSource={listPasajeros}
-                pagination={false}
-                className="tabla-pasajeros"
-                scroll={{ y: 220 }}
-                locale={{
-                  emptyText: (
-                    <div className="tabla-empty">
-                      <InboxOutlined style={{ fontSize: 48, color: "#ccc" }} />
-                      <p>No hay pasajeros agregados</p>
-                    </div>
-                  ),
-                }}
-              />
-            </div>
-          </div>
-        </>
-      ),
-    },
-    {
-      title: "Impresion y descarga",
-      content: (
-        <>
-          {showDownloadLink && (
-            <div className="group-buttons-descargar">
-              <PDFDownloadLink
-                document={
-                  <ConvertirPDF data={data} dataPasajeros={listPasajeros} />
-                }
-                fileName="datos-viaje.pdf"
-                className="button-download"
-              >
-                {({ loading }) => (
-                  <span className="pdf-text">
-                    <DownloadOutlined style={{ paddingRight: "10px" }} />
-                    {loading ? "Generando PDF..." : "Descargar PDF"}
-                  </span>
-                )}
-              </PDFDownloadLink>
-              <Button
-                size="large"
-                type="primary"
-                icon={<PrinterOutlined />}
-                style={{ backgroundColor: "#595959", color: "white" }}
-                onClick={imprimirDocumento}
-              >
-                Imprimir
-              </Button>
-            </div>
-          )}
-          <div
-            style={{
-              height: "600px",
-              border: "1px solid #ccc",
-              marginBottom: "20px",
-            }}
-          >
-            <PDFViewer width="100%" height="100%">
-              <ConvertirPDF data={data} dataPasajeros={listPasajeros} />
-            </PDFViewer>
-          </div>
-        </>
-      ),
-    },
-  ];
+    if (listaConductores.some((c) => c.license === license)) {
+      message.error("Este conductor ya fue añadido");
+      return;
+    }
 
-  const next = () => {
-    setCurrent(current + 1);
-    setShowDownloadLink(true);
+    if (listaConductores.length >= 4) {
+      message.warning("Solo se pueden añadir hasta 4 conductores");
+      return;
+    }
+
+    const nuevoConductor = {
+      license,
+      nombres: namesDriver,
+      apellidos: lastNameDriver,
+    };
+
+    setListaConductores([...listaConductores, nuevoConductor]);
+    console.log("los conductores son, ", listaConductores);
+    form.resetFields(["license", "namesDriver", "lastNameDriver"]);
   };
-  const prev = () => {
-    setCurrent(current - 1);
+
+  //handleDeleteDrivers
+  const handleDeleteDrivers = (license) => {
+    const nuevaLista = listaConductores.filter((c) => c.license !== license);
+    setListaConductores(nuevaLista);
   };
-  const items = steps.map((item) => ({ key: item.title, title: item.title }));
 
   return (
     <div className="contenedor-principal-cliente">
@@ -752,45 +399,11 @@ export default function VentanaCliente() {
         <RollbackOutlined />
         <span className="cliente-button-text">Atrás</span>
       </Button>
-      {/* <Steps current={current} items={items} className="steps" />
-      <div className="main-steps">{steps[current].content}</div>
-      <div className="steps-buttons">
-        {current > 0 && (
-          <Button style={{ marginRight: 8 }} onClick={() => prev()}>
-            Anterior
-          </Button>
-        )}
-        {current < steps.length - 1 && (
-          <Button
-            type="primary"
-            onClick={() => {
-              if (current === 0) {
-                form.submit();
-              } else {
-                next();
-              }
-            }}
-          >
-            Siguiente
-          </Button>
-        )}
-        {current === steps.length - 1 && (
-          <Button
-            type="primary"
-            onClick={() => {
-              message.success("¡Se guardo correctamente!");
-              navigate("/inicio");
-            }}
-          >
-            Finalizar
-          </Button>
-        )}
-      </div> */}
       <h2>Formulario de viaje</h2>
       <Form
         form={form}
         layout="vertical"
-        onFinish={registrarDatos}
+        onFinish={saveData}
         onFinishFailed={mostrarErrorFormBus}
         className="formulario-cliente"
       >
@@ -814,7 +427,7 @@ export default function VentanaCliente() {
               <Select
                 placeholder="Seleccione el origen"
                 optionFilterProp="label"
-                options={origenes}
+                options={origins}
               />
             </Form.Item>
             <Form.Item
@@ -830,7 +443,7 @@ export default function VentanaCliente() {
               <Select
                 placeholder="Seleccione el destino"
                 optionFilterProp="label"
-                options={destinos}
+                options={destination}
               />
             </Form.Item>
           </div>
@@ -864,16 +477,12 @@ export default function VentanaCliente() {
             <b>Datos de los conductores</b>
           </span>
         </div>
-        <div className="datos-conductor">
-          <div className="datos-conductor-uno">
+        <div className="group-input-list-drives">
+          <div className="inputs-drivers">
             <Form.Item
-              label="Licencia del conductor 1"
-              name="licencia1"
+              label="Licencia"
+              name="license"
               rules={[
-                {
-                  required: true,
-                  message: "Por favor, ingrese la licencia del conductor 1",
-                },
                 {
                   pattern: /^[0-9]{1,9}$/,
                   message: "Solo números, máximo 9 dígitos",
@@ -881,89 +490,50 @@ export default function VentanaCliente() {
               ]}
             >
               <Input
-                value={licencia}
-                onChange={handleLicenciaChange1}
-                placeholder="Ingrese el número de licencia"
+                placeholder="Ingrese la licencia"
                 maxLength={9}
-                inputMode="numeric"
-                pattern="[0-9]*"
+                onChange={handleLicenseChange}
               />
             </Form.Item>
-            <Form.Item
-              label="Nombres del conductor 1"
-              name="nombresConductor1"
-              rules={[
-                {
-                  required: true,
-                  message: "Por favor, ingrese los nombres del conductor 1",
-                },
-              ]}
-            >
-              <Input placeholder="Ingrese los nombres" />
+
+            <Form.Item label="Nombres" name="namesDriver">
+              <Input placeholder="Ingrese los nombres" maxLength={18} />
             </Form.Item>
-            <Form.Item
-              label="Apellidos del conductor 1"
-              name="apellidosConductor1"
-              rules={[
-                {
-                  required: true,
-                  message:
-                    "Por favor, ingrese los apellidos del conductor 1",
-                },
-              ]}
-            >
-              <Input placeholder="Ingrese los apellidos" />
+
+            <Form.Item label="Apellidos" name="lastNameDriver">
+              <Input placeholder="Ingrese los apellidos" maxLength={18} />
             </Form.Item>
+
+            <Button
+              type="primary"
+              onClick={handleAddConductor}
+              disabled={listaConductores.length >= 4}
+            >
+              Añadir
+            </Button>
           </div>
-          <div className="datos-conductor-dos">
-            <Form.Item
-              label="Licencia del conductor 2"
-              name="licencia2"
-              rules={[
-                {
-                  required: true,
-                  message: "Por favor, ingrese la licencia del conductor 2",
-                },
-                {
-                  pattern: /^[0-9]{1,9}$/,
-                  message: "Solo números, máximo 9 dígitos",
-                },
-              ]}
-            >
-              <Input
-                value={licencia}
-                onChange={handleLicenciaChange2}
-                placeholder="Ingrese el número de licencia"
-                maxLength={9}
-                inputMode="numeric"
-                pattern="[0-9]*"
-              />
-            </Form.Item>
-            <Form.Item
-              label="Nombres del conductor 2"
-              name="nombresConductor2"
-              rules={[
-                {
-                  required: true,
-                  message: "Por favor, ingrese los nombres del conductor 2",
-                },
-              ]}
-            >
-              <Input placeholder="Ingrese los nombres" />
-            </Form.Item>
-            <Form.Item
-              label="Apellidos del conductor 2"
-              name="apellidosConductor2"
-              rules={[
-                {
-                  required: true,
-                  message:
-                    "Por favor, ingrese los apellidos del conductor 2",
-                },
-              ]}
-            >
-              <Input placeholder="Ingrese los apellidos" />
-            </Form.Item>
+          <div className="list-drivers">
+            <List
+              header={<b>Conductores añadidos</b>}
+              bordered
+              dataSource={listaConductores}
+              renderItem={(item, index) => (
+                <List.Item
+                  key={index}
+                  actions={[
+                    <Button
+                      type="text"
+                      danger
+                      icon={<DeleteOutlined />}
+                      onClick={() => handleDeleteDrivers(item.license)}
+                    />,
+                  ]}
+                >
+                  <b>Conductor {index + 1}:</b> {item.nombres} {item.apellidos}{" "}
+                  - Licencia: {item.license}
+                </List.Item>
+              )}
+            />
           </div>
         </div>
 
@@ -986,10 +556,10 @@ export default function VentanaCliente() {
               ]}
             >
               <Select
-                onChange={buscarPlacaCamiones}
+                onChange={searchPlateTruck}
                 allowClear
                 placeholder="Seleccione la placa"
-                options={listaCamionesSelect}
+                options={listSelectTruck}
               />
             </Form.Item>
             <Form.Item
@@ -1033,7 +603,7 @@ export default function VentanaCliente() {
       {/* Modal para mostrar el formulario de registro de los pasajeros */}
       <Modal
         title={<h3 style={{ textAlign: "center" }}>Formulario de pasajero</h3>}
-        open={viewModal}
+        open={viewModalPassengers}
         onOk={() => form2.submit()}
         onCancel={showCloseConfirm}
         okText="Guardar"

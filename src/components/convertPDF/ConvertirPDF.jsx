@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   espacioTexto: {
-    marginLeft: 5,
+    marginLeft: 2,
   },
   espacioLabel: {
     marginLeft: 20,
@@ -48,10 +48,23 @@ const styles = StyleSheet.create({
   },
   odenadoFila: {
     display: "flex",
-    flexWrap: "wrap",
     flexDirection: "row",
     marginTop: 5,
   },
+  gridConductores: {
+    flexDirection: "row",
+    flexWrap: "wrap", // Permite que los items bajen de línea
+    marginTop: 5,
+  },
+
+  cardConductor: {
+    width: "50%", // Cada bloque ocupa media fila → 2 columnas
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "center",
+    marginTop: 5,
+  },
+
   ultimaFila: {
     display: "flex",
     flexWrap: "wrap",
@@ -104,7 +117,7 @@ export default function ConvertirPDF({ data, dataPasajeros }) {
     <Document>
       <Page size="Legal" style={styles.page}>
         <View style={styles.header}>
-          <Image style={{ height: 100, marginRight: 80 }} src={LogoLetras} />
+          <Image style={{ height: 90, marginRight: 140 }} src={LogoLetras} />
           <Image style={{ height: 90 }} src={LogoBus} />
         </View>
 
@@ -131,24 +144,49 @@ export default function ConvertirPDF({ data, dataPasajeros }) {
           <Text style={styles.espacioHora}>Hora de salida:</Text>
           <Text style={styles.espacioTexto}>{data.horaViaje}</Text>
         </View>
-        <View style={styles.odenadoFila}>
-          <Text>Conductor 1:</Text>
-          <Text style={styles.espacioTexto}>
-            {`${data.nombresConductor1 || ""} ${data.apellidosConductor1 || ""}`}
-          </Text>
 
-          <Text style={{ marginLeft: 10 }}>Licencia:</Text>
-          <Text style={styles.espacioTexto}>{data.licencia1}</Text>
-        </View>
+        <View style={styles.gridConductores}>
+          {[
+            {
+              label: "Conductor 1",
+              nombre: `${data.nombresConductor1 || ""} ${
+                data.apellidosConductor1 || ""
+              }`,
+              licencia: data.licencia1,
+            },
+            {
+              label: "Conductor 2",
+              nombre: `${data.nombresConductor2 || ""} ${
+                data.apellidosConductor2 || ""
+              }`,
+              licencia: data.licencia2,
+            },
+            {
+              label: "Conductor 3",
+              nombre: `${data.nombresConductor3 || ""} ${
+                data.apellidosConductor3 || ""
+              }`,
+              licencia: data.licencia3,
+            },
+            {
+              label: "Conductor 4",
+              nombre: `${data.nombresConductor4 || ""} ${
+                data.apellidosConductor4 || ""
+              }`,
+              licencia: data.licencia4,
+            },
+          ]
+            // 🔑 filtramos solo los que tengan licencia (o nombre)
+            .filter((item) => item.nombre.trim() !== "" && item.licencia)
+            .map((item, index) => (
+              <View key={index} style={styles.cardConductor}>
+                <Text>{item.label}:</Text>
+                <Text style={styles.espacioTexto}>{item.nombre}</Text>
 
-        <View style={[styles.odenadoFila, styles.formulario]}>
-          <Text>Conductor 2:</Text>
-          <Text style={styles.espacioTexto}>
-            {`${data.nombresConductor2 || ""} ${data.apellidosConductor2 || ""}`}
-          </Text>
-
-          <Text style={{ marginLeft: 10 }}>Licencia:</Text>
-          <Text style={styles.espacioTexto}>{data.licencia2}</Text>
+                <Text style={{ marginLeft: 10 }}></Text>
+                <Text style={styles.espacioTexto}>{item.licencia}</Text>
+              </View>
+            ))}
         </View>
 
         <View style={styles.odenadoFila}>

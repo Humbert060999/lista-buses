@@ -50,7 +50,11 @@ export default function Login() {
               },
             ]}
           >
-            <Input placeholder="Ingrese el nombre de usuario" autoFocus />
+            <Input
+              placeholder="Ingrese el nombre de usuario"
+              autoFocus
+              maxLength={15}
+            />
           </Form.Item>
           <Form.Item
             label="Contraseña"
@@ -59,7 +63,10 @@ export default function Login() {
               { required: true, message: "Por favor ingrese su contraseña" },
             ]}
           >
-            <Input.Password placeholder="Ingrese la contraseña" />
+            <Input.Password
+              placeholder="Ingrese la contraseña"
+              maxLength={15}
+            />
           </Form.Item>
           <Button type="primary" block htmlType="submit">
             Ingresar

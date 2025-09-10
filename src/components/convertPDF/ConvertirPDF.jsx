@@ -89,10 +89,10 @@ const styles = StyleSheet.create({
   },
   // Columnas con ancho especificado
   col1: { width: "3%" }, // N°
-  col2: { width: "18%" }, // Nombres
+  col2: { width: "16%" }, // Nombres
   col3: { width: "18%" }, // Apellidos
   col4: { width: "9%" }, // NAC
-  col5: { width: "9%" }, // CI
+  col5: { width: "11%" }, // CI
   col6: { width: "12%" }, // Fecha NAC
   col7: { width: "12%" }, // Origen
   col8: { width: "8%", textAlign: "center" }, // Sexo
@@ -101,17 +101,23 @@ const styles = StyleSheet.create({
 
 export default function ConvertirPDF({ data, dataPasajeros }) {
   // Generar lista de pasajeros directamente
-  const listPasajeros = (dataPasajeros || []).map((pasajero, i) => ({
-    number: i + 1,
-    nombre: pasajero.nombre,
-    apellido: pasajero.apellido,
-    nac: pasajero.nacionalidadPasajero,
-    ci: pasajero.ci,
-    fechaNac: pasajero.fechaNacimiento,
-    origen: data?.origen || "",
-    sexo: pasajero.sexo === 1 ? "M" : "F",
-    destino: pasajero.destinoPasajero || "",
-  }));
+  const listPasajeros = (dataPasajeros || [])
+    // filtramos por si hay datos vacíos (opcional)
+    .filter((p) => p.nroAsiento)
+    // ordenamos por nroAsiento
+    .sort((a, b) => a.nroAsiento - b.nroAsiento)
+    // mapeamos al formato que usa tu PDF
+    .map((pasajero) => ({
+      number: pasajero.nroAsiento, // aquí usamos el número de asiento
+      nombre: pasajero.nombre,
+      apellido: pasajero.apellido,
+      nac: pasajero.nacionalidadPasajero,
+      ci: pasajero.ci,
+      fechaNac: pasajero.fechaNacimiento,
+      origen: data?.origen || "",
+      sexo: pasajero.sexo === 1 ? "M" : "F",
+      destino: pasajero.destinoPasajero || "",
+    }));
 
   return (
     <Document>

@@ -594,14 +594,14 @@ export default function TablaPlanillas() {
               rules={[
                 { required: true, message: "Por favor, ingresa el CI" },
                 {
-                  pattern: /^[0-9]{1,9}$/,
-                  message: "Solo números, máximo 9 dígitos",
+                  pattern: /^[0-9]{1,12}$/,
+                  message: "Solo números, máximo 12 dígitos",
                 },
               ]}
             >
               <Input
                 placeholder="Ingrese su CI"
-                maxLength={9}
+                maxLength={12}
                 inputMode="numeric"
                 pattern="[0-9]*"
               />

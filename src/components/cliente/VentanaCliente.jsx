@@ -449,6 +449,7 @@ export default function VentanaCliente() {
               <Select
                 placeholder="Seleccione el origen"
                 optionFilterProp="label"
+                showSearch={false}
                 options={origins}
               />
             </Form.Item>
@@ -466,6 +467,7 @@ export default function VentanaCliente() {
                 placeholder="Seleccione el destino"
                 optionFilterProp="label"
                 options={destination}
+                showSearch={false}
               />
             </Form.Item>
           </div>

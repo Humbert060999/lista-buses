@@ -712,8 +712,8 @@ export default function TablaPlanillas() {
               ]}
             >
               <Select
-                showSearch
                 allowClear={true}
+                showSearch={false}
                 placeholder="Seleccione el destino"
                 filterOption={(input, option) =>
                   (option?.label ?? "")

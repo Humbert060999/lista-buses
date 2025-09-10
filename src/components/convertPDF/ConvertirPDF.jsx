@@ -204,7 +204,7 @@ export default function ConvertirPDF({ data, dataPasajeros }) {
         </View>
         <View style={styles.ultimaFila}>
           <Text>Póliza de seguro:</Text>
-          <Text style={styles.espacioTexto}>{data.polizaSeguro}</Text>
+          <Text style={styles.espacioTexto}>{data.polizaCamion}</Text>
           <Text style={{ marginLeft: 10 }}>VTO:</Text>
           <Text style={styles.espacioTexto}>{data.vtoCamion}</Text>
           <Text style={{ marginLeft: 10 }}>Chasis:</Text>

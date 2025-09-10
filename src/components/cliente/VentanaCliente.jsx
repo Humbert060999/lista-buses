@@ -148,7 +148,7 @@ export default function VentanaCliente() {
       modelo: "B450R",
       anio: 2017,
       polizaSeguro: "74-000000800142",
-      VTO: "2026-08-21",
+      VTO: "21-08-2026",
       chasis: "9BVT2T123GE385828",
       motor: "",
     },

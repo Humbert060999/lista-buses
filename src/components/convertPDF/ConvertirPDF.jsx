@@ -190,7 +190,9 @@ export default function ConvertirPDF({ data, dataPasajeros }) {
                 <Text style={styles.espacioTexto}>{item.nombre}</Text>
 
                 <Text style={{ marginLeft: 10 }}></Text>
-                <Text style={styles.espacioTexto}>{item.licencia}</Text>
+                <Text style={styles.espacioTexto}>
+                  Licencia:{item.licencia}
+                </Text>
               </View>
             ))}
         </View>

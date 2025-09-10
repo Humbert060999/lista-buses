@@ -188,9 +188,12 @@ export default function TablaPlanillas() {
 
   // Opciones de los destinos
   const optionsDestination = [
-    { value: "Iquique", label: "Iquique" },
-    { value: "Santiago", label: "Santiago" },
     { value: "Oruro", label: "Oruro" },
+    { value: "Cochabamba", label: "Cochabamba" },
+    { value: "Iquique", label: "Iquique" },
+    { value: "Calama", label: "Calama" },
+    { value: "Santiago", label: "Santiago" },
+    { value: "Antofagasta", label: "Antofagasta" },
   ];
 
   // Función para cargar los viajes
@@ -604,7 +607,7 @@ export default function TablaPlanillas() {
               />
             </Form.Item>
 
-            <Form.Item
+            {/* <Form.Item
               label="Precio"
               name="precio"
               rules={[
@@ -627,7 +630,7 @@ export default function TablaPlanillas() {
                 }
                 parser={(value) => value.replace(/Bs.\s?|(,*)/g, "")}
               />
-            </Form.Item>
+            </Form.Item> */}
           </div>
 
           <Form.Item

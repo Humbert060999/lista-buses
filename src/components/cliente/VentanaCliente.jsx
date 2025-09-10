@@ -80,16 +80,28 @@ export default function VentanaCliente() {
 
   const origins = [
     {
-      value: "Cochabamba",
-      label: "Cochabamba",
-    },
-    {
       value: "Oruro",
       label: "Oruro",
     },
     {
+      value: "Cochabamba",
+      label: "Cochabamba",
+    },
+    {
       value: "Iquique",
       label: "Iquique",
+    },
+    {
+      value: "Calama",
+      label: "Calama",
+    },
+    {
+      value: "Santiago",
+      label: "Santiago",
+    },
+    {
+      value: "Antofagasta",
+      label: "Antofagasta",
     },
   ];
 
@@ -99,62 +111,72 @@ export default function VentanaCliente() {
       label: "Oruro",
     },
     {
+      value: "Cochabamba",
+      label: "Cochabamba",
+    },
+    {
       value: "Iquique",
       label: "Iquique",
+    },
+    {
+      value: "Calama",
+      label: "Calama",
+    },
+    {
+      value: "Santiago",
+      label: "Santiago",
+    },
+    {
+      value: "Antofagasta",
+      label: "Antofagasta",
     },
   ];
 
   const listaDatos = [
     {
-      license: "123456",
-      nombres: "Juan Alejandro",
-      apellidos: "Pérez Marquina",
+      license: "13718294",
+      nombres: "Luis Mario",
+      apellidos: "Ortega",
     },
-    { license: "987654", nombres: "Andres ", apellidos: "Gómez Quinteros" },
-    { license: "12714653", nombres: "Humberto", apellidos: "Lucana Mamani" },
   ];
 
   const listTrucks = [
     {
-      placa: "ABC123",
-      resolucionChilena: "Res-001",
-      vence: "2024-12-31",
-      modelo: "Modelo X",
-      anio: 2022,
-      polizaSeguro: "Pol-123456",
-      VTO: "2025-06-30",
-      chasis: "CHS-123456",
-      motor: "MTR-654321",
+      placa: "JBXY57",
+      resolucionChilena: "3258/2025",
+      vence: "2025-07-22",
+      modelo: "B450R",
+      anio: 2017,
+      polizaSeguro: "74-000000800142",
+      VTO: "2026-08-21",
+      chasis: "9BVT2T123GE385828",
+      motor: "",
     },
-    {
-      placa: "DEF456",
-      resolucionChilena: "Res-002",
-      vence: "2025-01-15",
-      modelo: "Modelo Y",
-      anio: 2023,
-      polizaSeguro: "Pol-789012",
-      VTO: "2025-07-15",
-      chasis: "CHS-789012",
-      motor: "MTR-987654",
-    },
-    {
-      placa: "2357BKA",
-      resolucionChilena: "Res-003",
-      vence: "2024-11-30",
-      modelo: "Modelo Z",
-      anio: 2021,
-      polizaSeguro: "Pol-345678",
-      VTO: "2025-08-01",
-      chasis: "CHS-345678",
-      motor: "MTR-123456",
-    },
+    // {
+    //   placa: "DEF456",
+    //   resolucionChilena: "Res-002",
+    //   vence: "2025-01-15",
+    //   modelo: "Modelo Y",
+    //   anio: 2023,
+    //   polizaSeguro: "Pol-789012",
+    //   VTO: "2025-07-15",
+    //   chasis: "CHS-789012",
+    //   motor: "MTR-987654",
+    // },
+    // {
+    //   placa: "2357BKA",
+    //   resolucionChilena: "Res-003",
+    //   vence: "2024-11-30",
+    //   modelo: "Modelo Z",
+    //   anio: 2021,
+    //   polizaSeguro: "Pol-345678",
+    //   VTO: "2025-08-01",
+    //   chasis: "CHS-345678",
+    //   motor: "MTR-123456",
+    // },
   ];
 
-  const listSelectTruck = [
-    { value: "ABC123", label: "ABC123" },
-    { value: "DEF456", label: "DEF456" },
-    { value: "2357BKA", label: "2357BKA" },
-  ];
+  const listSelectTruck = [{ value: "JBXY57", label: "JBXY57" }];
 
   // Función que devuelve una promesa con el nuevo ID
   const buscarUltimoId = async () => {

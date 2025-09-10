@@ -11,6 +11,7 @@ export default function Login() {
     { username: "admin", password: "12345" },
     { username: "humberto", password: "12345" },
     { username: "daniel", password: "daniel" },
+    { username: "Cancio", password: "Cancio267" },
   ];
 
   const iniciarSesion = (values) => {

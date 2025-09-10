@@ -693,7 +693,7 @@ export default function TablaPlanillas() {
               ]}
             >
               <Select
-                showSearch
+                showSearch={false}
                 allowClear={true}
                 placeholder="Seleccione la nacionalidad"
                 filterOption={(input, option) =>

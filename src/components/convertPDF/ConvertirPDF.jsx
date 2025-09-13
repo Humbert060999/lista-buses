@@ -10,13 +10,14 @@ import {
 import LogoBus from "../../assets/logo-bus.png";
 import LogoLetras from "../../assets/logo-titulo.png";
 import MarcaAgua from "../../assets/logo-titulo.png";
+// import otro from "../../../public/Fonts/";
 
 // Registrar fuentes Roboto (Regular + Bold)
 Font.register({
   family: "Roboto",
   fonts: [
-    { src: "/src/fonts/Roboto-Regular.ttf", fontWeight: "normal" },
-    { src: "/src/fonts/Roboto-Bold.ttf", fontWeight: "bold" },
+    { src: "/Fonts/Roboto-Regular.ttf", fontWeight: "normal" },
+    { src: "/Fonts/Roboto-Bold.ttf", fontWeight: "bold" },
   ],
 });
 

@@ -142,7 +142,7 @@ export default function ConvertirPDF({ data, dataPasajeros }) {
 
   return (
     <Document>
-      <Page size="Legal" style={styles.page}>
+      <Page size="LEGAL" style={styles.page}>
         {/* Marca de agua */}
         <View style={styles.watermarkContainer}>
           {Array.from({ length: 50 }).map((_, i) => (

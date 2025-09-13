@@ -142,8 +142,19 @@ export default function VentanaCliente() {
 
   const listTrucks = [
     {
+      placa: "CSHW32",
+      resolucionChilena: "3258/2025 DNO",
+      vence: "2025-07-22",
+      modelo: "O500RS",
+      anio: 2011,
+      polizaSeguro: "74-000000800143",
+      VTO: "21-01-2026",
+      chasis: "9BM634071BB725761",
+      motor: "457927U0947992",
+    },
+    {
       placa: "JBXY57",
-      resolucionChilena: "3258/2025",
+      resolucionChilena: "3258/2025 DNO",
       vence: "2025-07-22",
       modelo: "B450R",
       anio: 2017,
@@ -546,15 +557,23 @@ export default function VentanaCliente() {
                   key={index}
                   actions={[
                     <Button
-                      type="text"
                       danger
                       icon={<DeleteOutlined />}
                       onClick={() => handleDeleteDrivers(item.license)}
                     />,
                   ]}
                 >
-                  <b>Conductor {index + 1}:</b> {item.nombres} {item.apellidos}{" "}
-                  - Licencia: {item.license}
+                  <div className="list-driver-license">
+                    <div className="driver-info">
+                      <b>Conductor {index + 1}:</b>{" "}
+                      <span className="driver-name">
+                        {item.nombres} {item.apellidos}
+                      </span>
+                    </div>
+                    <div className="driver-license">
+                      <b>Licencia:</b> {item.license}
+                    </div>
+                  </div>
                 </List.Item>
               )}
             />
@@ -606,7 +625,7 @@ export default function VentanaCliente() {
             <Form.Item label="Poliza de seguro" name="polizaCamion">
               <Input readOnly />
             </Form.Item>
-            <Form.Item label="VTO" name="vtoCamion">
+            <Form.Item label="Vence" name="vtoCamion">
               <Input readOnly />
             </Form.Item>
             <Form.Item label="Chasis" name="chasisCamion">

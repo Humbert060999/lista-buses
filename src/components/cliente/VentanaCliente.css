@@ -215,11 +215,17 @@ h2 {
   padding-top: 2.5%;
 }
 
-@media only screen and (max-width: 1080px) {
+.list-driver-license {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding-top: 1px;
+}
+
+@media only screen and (max-width: 768px) {
   .formulario-cliente {
     padding: 5%;
     margin: 0 5% 10% 5%;
-
   }
 
   .datos-viaje {
@@ -289,4 +295,14 @@ h2 {
   .list-drivers {
     width: 100%;
   }
+
+  .list-driver-license {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .driver-name {
+    display: block;
+  }
+
 }

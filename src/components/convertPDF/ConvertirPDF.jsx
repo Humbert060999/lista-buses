@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import {
   Page,
   Text,
@@ -6,30 +5,41 @@ import {
   Document,
   StyleSheet,
   Image,
+  Font,
 } from "@react-pdf/renderer";
 import LogoBus from "../../assets/logo-bus.png";
 import LogoLetras from "../../assets/logo-titulo.png";
+import MarcaAgua from "../../assets/logo-titulo.png";
 
-// Definir estilos
+// Registrar fuentes Roboto (Regular + Bold)
+Font.register({
+  family: "Roboto",
+  fonts: [
+    { src: "/src/fonts/Roboto-Regular.ttf", fontWeight: "normal" },
+    { src: "/src/fonts/Roboto-Bold.ttf", fontWeight: "bold" },
+  ],
+});
+
+// Estilos
 const styles = StyleSheet.create({
   page: {
     flexDirection: "column",
     paddingTop: -5,
     padding: 30,
     fontSize: 10,
+    fontFamily: "Roboto",
   },
   boldText: {
+    fontFamily: "Roboto",
     fontWeight: "bold",
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
   },
-
   fechaViaje: {
     marginLeft: 430,
   },
-
   fila1: {
     display: "flex",
     flexWrap: "wrap",
@@ -37,12 +47,11 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   espacioTexto: {
-    marginLeft: 2,
+    marginLeft: 5,
   },
   espacioLabel: {
     marginLeft: 20,
   },
-
   espacioHora: {
     marginLeft: "10%",
   },
@@ -52,19 +61,16 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   gridConductores: {
-    flexDirection: "row",
-    flexWrap: "wrap", // Permite que los items bajen de línea
+    flexDirection: "column",
+    gap: 6,
     marginTop: 5,
   },
-
-  cardConductor: {
-    width: "50%", // Cada bloque ocupa media fila → 2 columnas
+  rowConductor: {
     flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "center",
-    marginTop: 5,
   },
-
+  colConductorNombre: {
+    width: "47.5%",
+  },
   ultimaFila: {
     display: "flex",
     flexWrap: "wrap",
@@ -83,32 +89,46 @@ const styles = StyleSheet.create({
     paddingBottom: 1.2,
     fontSize: 8,
   },
-
   bold: {
     fontWeight: "bold",
   },
-  // Columnas con ancho especificado
-  col1: { width: "3%" }, // N°
-  col2: { width: "16%" }, // Nombres
-  col3: { width: "18%" }, // Apellidos
-  col4: { width: "9%" }, // NAC
-  col5: { width: "11%" }, // CI
-  col6: { width: "12%" }, // Fecha NAC
-  col7: { width: "12%" }, // Origen
-  col8: { width: "8%", textAlign: "center" }, // Sexo
-  col9: { width: "15%" }, // Destino
+  col1: { width: "3%" },
+  col2: { width: "16%" },
+  col3: { width: "18%" },
+  col4: { width: "9%" },
+  col5: { width: "11%" },
+  col6: { width: "12%" },
+  col7: { width: "12%" },
+  col8: { width: "8%", textAlign: "center" },
+  col9: { width: "15%" },
+
+  watermarkContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    zIndex: -1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    opacity: 0.08, // transparencia suave
+  },
+
+  watermarkImage: {
+    width: 100, // más pequeño
+    height: 80,
+    margin: 10, // separación entre cada marca
+    transform: "rotate(-45deg)", // inclinado
+  },
 });
 
 export default function ConvertirPDF({ data, dataPasajeros }) {
-  // Generar lista de pasajeros directamente
+  // lista de pasajeros
   const listPasajeros = (dataPasajeros || [])
-    // filtramos por si hay datos vacíos (opcional)
     .filter((p) => p.nroAsiento)
-    // ordenamos por nroAsiento
     .sort((a, b) => a.nroAsiento - b.nroAsiento)
-    // mapeamos al formato que usa tu PDF
     .map((pasajero) => ({
-      number: pasajero.nroAsiento, // aquí usamos el número de asiento
+      number: pasajero.nroAsiento,
       nombre: pasajero.nombre,
       apellido: pasajero.apellido,
       nac: pasajero.nacionalidadPasajero,
@@ -122,35 +142,51 @@ export default function ConvertirPDF({ data, dataPasajeros }) {
   return (
     <Document>
       <Page size="Legal" style={styles.page}>
+        {/* Marca de agua */}
+        <View style={styles.watermarkContainer}>
+          {Array.from({ length: 50 }).map((_, i) => (
+            <Image key={i} src={MarcaAgua} style={styles.watermarkImage} />
+          ))}
+        </View>
+
+        {/* Header */}
         <View style={styles.header}>
           <Image style={{ height: 90, marginRight: 140 }} src={LogoLetras} />
           <Image style={{ height: 90 }} src={LogoBus} />
         </View>
 
-        {/* Campos de texto */}
+        {/* Fecha de viaje */}
         <View style={styles.formulario}>
-          <Text style={styles.fechaViaje}>Fecha de viaje:</Text>
-          <Text style={{ marginLeft: 505, marginTop: -10 }}>
-            {data.fechaViaje}
+          <Text style={[styles.fechaViaje]}>
+            <Text style={styles.boldText}>Fecha de viaje: </Text>
+            <Text>{data.fechaViaje}</Text>
           </Text>
         </View>
+
+        {/* Fila Origen - Destino - Placa - Hora */}
         <View style={styles.fila1}>
-          <Text>Origen:</Text>
+          <Text>
+            <Text style={styles.boldText}>Origen: </Text>
+            <Text>{data.origen}</Text>
+          </Text>
 
-          <Text style={styles.espacioTexto}>{data.origen}</Text>
-
-          <Text style={styles.espacioLabel}>Destino:</Text>
-          <Text style={styles.espacioTexto}>{data.destino}</Text>
+          <Text style={styles.espacioLabel}>
+            <Text style={styles.boldText}>Destino: </Text>
+            <Text>{data.destino}</Text>
+          </Text>
 
           <Text style={[styles.espacioLabel, { marginLeft: "50px" }]}>
-            Placa o Patente N°:
+            <Text style={styles.boldText}>Placa o Patente N°: </Text>
+            <Text>{data.placa}</Text>
           </Text>
-          <Text style={styles.espacioTexto}>{data.placa}</Text>
 
-          <Text style={styles.espacioHora}>Hora de salida:</Text>
-          <Text style={styles.espacioTexto}>{data.horaViaje}</Text>
+          <Text style={styles.espacioHora}>
+            <Text style={styles.boldText}>Hora de salida: </Text>
+            <Text>{data.horaViaje}</Text>
+          </Text>
         </View>
 
+        {/* Conductores */}
         <View style={styles.gridConductores}>
           {[
             {
@@ -182,45 +218,64 @@ export default function ConvertirPDF({ data, dataPasajeros }) {
               licencia: data.licencia4,
             },
           ]
-            // 🔑 filtramos solo los que tengan licencia (o nombre)
             .filter((item) => item.nombre.trim() !== "" && item.licencia)
             .map((item, index) => (
-              <View key={index} style={styles.cardConductor}>
-                <Text>{item.label}:</Text>
-                <Text style={styles.espacioTexto}>{item.nombre}</Text>
-
-                <Text style={{ marginLeft: 10 }}></Text>
-                <Text style={styles.espacioTexto}>
-                  Licencia:{item.licencia}
+              <View key={index} style={styles.rowConductor}>
+                <Text style={styles.colConductorNombre}>
+                  <Text style={styles.boldText}>{item.label}: </Text>
+                  <Text>{item.nombre}</Text>
+                </Text>
+                <Text>
+                  <Text style={styles.boldText}>Licencia: </Text>
+                  <Text>{item.licencia}</Text>
                 </Text>
               </View>
             ))}
         </View>
 
+        {/* Datos Camión */}
         <View style={styles.odenadoFila}>
-          <Text>Resolucion Chilena Excenta N°:</Text>
-          <Text style={styles.espacioTexto}>{data.resolucionChilena}</Text>
+          <Text>
+            <Text style={styles.boldText}>Resolución Chilena Excenta N°: </Text>
+            <Text>{data.resolucionChilena}</Text>
+          </Text>
 
-          <Text style={{ marginLeft: 50 }}>Vence:</Text>
-          <Text style={styles.espacioTexto}>{data.venceCamion}</Text>
+          <Text style={{ marginLeft: 50 }}>
+            <Text style={styles.boldText}>Vence: </Text>
+            <Text>{data.venceCamion}</Text>
+          </Text>
 
-          <Text style={{ marginLeft: 10 }}>Modelo:</Text>
-          <Text style={styles.espacioTexto}>{data.modeloCamion}</Text>
+          <Text style={{ marginLeft: 10 }}>
+            <Text style={styles.boldText}>Modelo: </Text>
+            <Text>{data.modeloCamion}</Text>
+          </Text>
 
-          <Text style={{ marginLeft: 10 }}>Año:</Text>
-          <Text style={styles.espacioTexto}>{data.anioCamion}</Text>
+          <Text style={{ marginLeft: 10 }}>
+            <Text style={styles.boldText}>Año: </Text>
+            <Text>{data.anioCamion}</Text>
+          </Text>
         </View>
+
         <View style={styles.ultimaFila}>
-          <Text>Póliza de seguro:</Text>
-          <Text style={styles.espacioTexto}>{data.polizaCamion}</Text>
-          <Text style={{ marginLeft: 10 }}>VTO:</Text>
-          <Text style={styles.espacioTexto}>{data.vtoCamion}</Text>
-          <Text style={{ marginLeft: 10 }}>Chasis:</Text>
-          <Text style={styles.espacioTexto}>{data.chasisCamion}</Text>
-          <Text style={{ marginLeft: 10 }}>Motor:</Text>
-          <Text style={styles.espacioTexto}>{data.motorCamion}</Text>
+          <Text>
+            <Text style={styles.boldText}>Póliza de seguro: </Text>
+            <Text>{data.polizaCamion}</Text>
+          </Text>
+          <Text style={{ marginLeft: 10 }}>
+            <Text style={styles.boldText}>Vence: </Text>
+            <Text>{data.vtoCamion}</Text>
+          </Text>
+          <Text style={{ marginLeft: 10 }}>
+            <Text style={styles.boldText}>Chasis: </Text>
+            <Text>{data.chasisCamion}</Text>
+          </Text>
+          <Text style={{ marginLeft: 10 }}>
+            <Text style={styles.boldText}>Motor: </Text>
+            <Text>{data.motorCamion}</Text>
+          </Text>
         </View>
 
+        {/* Tabla Pasajeros */}
         <View style={styles.table}>
           <View style={[styles.row, styles.bold, styles.header]}>
             <Text style={styles.col1}>N°</Text>

@@ -56,7 +56,6 @@ export default function TablaPlanillas() {
   useEffect(() => {
     const width = window.innerWidth;
     if (width < 768) {
-      setLayoutTable("auto");
       setSizeButtons("large");
       setSizeModalListPasengger("95%");
     }
@@ -72,22 +71,31 @@ export default function TablaPlanillas() {
     }
   };
   const widthTable = {
-    widthColumn1: 15,
-    widthColumn2: 20,
-    widthColumn3: 30,
-    widthColumn4: 20,
-    widthColumn5: 60,
+    widthColumn0: 100,
+    widthColumn1: 70,
+    widthColumn2: 70,
+    widthColumn3: 120,
+    widthColumn4: 100,
+    widthColumn5: 100,
   };
 
   const widthTablePhone = {
+    widthColumn0: 69,
     widthColumn1: 10,
-    widthColumn2: 10,
-    widthColumn3: 10,
+    widthColumn2: 70,
+    widthColumn3: 100,
     widthColumn4: 10,
     widthColumn5: 10,
   };
 
   const columnsTrips = [
+    {
+      title: "Fecha",
+      dataIndex: "fechaViaje",
+      key: "fecha",
+      width: widthTableInitial().widthColumn0,
+      // fixed: "left",
+    },
     {
       title: "Placa",
       dataIndex: "placa",
@@ -123,6 +131,7 @@ export default function TablaPlanillas() {
       title: "Opciones",
       key: "opciones",
       width: widthTableInitial().widthColumn5,
+
       render: (text, record) => (
         <Space className="tabla-buttons">
           <Button
@@ -522,7 +531,7 @@ export default function TablaPlanillas() {
               columns={columnsTrips}
               dataSource={viajes}
               tableLayout={layoutTable}
-              scroll={{ y: scrollY }}
+              scroll={{ x: "max-content", y: scrollY }}
               pagination={false}
             />
           </div>
@@ -738,8 +747,8 @@ export default function TablaPlanillas() {
       <Modal
         open={modalListPassengers}
         onCancel={closeModalListPassengers}
-        footer={null} // quitamos OK / Cancel porque ya tienes botón "Cerrar"
-        width={sizeModalListPassenger} // más responsivo en móvil
+        footer={null}
+        width={sizeModalListPassenger}
         className="modal-list-passengers"
       >
         <h2 style={{ textAlign: "center", marginBottom: "1rem" }}>

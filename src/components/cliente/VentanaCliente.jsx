@@ -187,7 +187,10 @@ export default function VentanaCliente() {
     // },
   ];
 
-  const listSelectTruck = [{ value: "JBXY57", label: "JBXY57" }];
+  const listSelectTruck = [
+    { value: "JBXY57", label: "JBXY57" },
+    { value: "CSHW32", label: "CSHW32" },
+  ];
 
   // Función que devuelve una promesa con el nuevo ID
   const buscarUltimoId = async () => {

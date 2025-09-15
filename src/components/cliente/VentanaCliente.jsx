@@ -138,6 +138,11 @@ export default function VentanaCliente() {
       nombres: "Luis Mario",
       apellidos: "Ortega",
     },
+    {
+      license: "5515709",
+      nombres: "Edber",
+      apellidos: "Alfaro Nina",
+    },
   ];
 
   const listTrucks = [
@@ -153,6 +158,17 @@ export default function VentanaCliente() {
       motor: "457927U0947992",
     },
     {
+      placa: "JVTY12",
+      resolucionChilena: "2720/2024 DNO",
+      vence: "2024-07-26",
+      modelo: "K400",
+      anio: 2018,
+      polizaSeguro: "74-000000767972",
+      VTO: "27-02-2026",
+      chasis: "9BSK6X200H3902001",
+      motor: "8291114",
+    },
+    {
       placa: "JBXY57",
       resolucionChilena: "3258/2025 DNO",
       vence: "2025-07-22",
@@ -163,33 +179,12 @@ export default function VentanaCliente() {
       chasis: "9BVT2T123GE385828",
       motor: "",
     },
-    // {
-    //   placa: "DEF456",
-    //   resolucionChilena: "Res-002",
-    //   vence: "2025-01-15",
-    //   modelo: "Modelo Y",
-    //   anio: 2023,
-    //   polizaSeguro: "Pol-789012",
-    //   VTO: "2025-07-15",
-    //   chasis: "CHS-789012",
-    //   motor: "MTR-987654",
-    // },
-    // {
-    //   placa: "2357BKA",
-    //   resolucionChilena: "Res-003",
-    //   vence: "2024-11-30",
-    //   modelo: "Modelo Z",
-    //   anio: 2021,
-    //   polizaSeguro: "Pol-345678",
-    //   VTO: "2025-08-01",
-    //   chasis: "CHS-345678",
-    //   motor: "MTR-123456",
-    // },
   ];
 
   const listSelectTruck = [
-    { value: "JBXY57", label: "JBXY57" },
-    { value: "CSHW32", label: "CSHW32" },
+    // { value: "JBXY57", label: "JBXY57" },
+    // { value: "CSHW32", label: "CSHW32" },
+    { value: "JVTY12", label: "JVTY12" },
   ];
 
   // Función que devuelve una promesa con el nuevo ID

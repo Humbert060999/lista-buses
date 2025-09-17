@@ -1,6 +1,8 @@
 import "./Login.css";
 import { Input, Form, Button, message } from "antd";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { API_URL } from "../../api";
 import IconoLogin from "../../assets/icono-usuario.png";
 
 export default function Login() {
@@ -14,17 +16,22 @@ export default function Login() {
     { username: "Cancio", password: "Cancio267" },
   ];
 
-  const iniciarSesion = (values) => {
-    // Validación de las credenciales
-    const user = users.find(
-      (user) =>
-        user.username === values.user && user.password === values.password
-    );
+  const iniciarSesion = async (values) => {
+    try {
+      // Petición al backend Spring Boot
+      const res = await axios.post(`${API_URL}/auth/login`, {
+        username: values.user,
+        password: values.password,
+      });
 
-    if (user) {
+      // Guardar tokens (temporal para desarrollo)
+      localStorage.setItem("accessToken", res.data.accessToken);
+      localStorage.setItem("refreshToken", res.data.refreshToken);
+
+      message.success("Inicio de sesión correctamente");
       navigate("/inicio");
-      message.success("Inicio de sesión correctamente ");
-    } else {
+    } catch (err) {
+      // Si el backend devuelve 401 u otro error
       message.error("Usuario o contraseña incorrectos");
     }
   };

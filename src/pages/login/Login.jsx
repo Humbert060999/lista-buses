@@ -14,6 +14,10 @@ export default function Login() {
     { username: "humberto", password: "12345" },
     { username: "daniel", password: "daniel" },
     { username: "Cancio", password: "Cancio267" },
+    { username: "jbxy57", password: "jbxy57" },
+    { username: "cshw32", password: "cshw32" },
+    { username: "jvty12", password: "jvty12" },
+    { username: "kclt56", password: "kclt56" },
   ];
 
   const iniciarSesion = (values) => {

@@ -16,25 +16,39 @@ export default function Login() {
     { username: "Cancio", password: "Cancio267" },
   ];
 
-  const iniciarSesion = async (values) => {
-    try {
-      // Petición al backend Spring Boot
-      const res = await axios.post(`${API_URL}/auth/login`, {
-        username: values.user,
-        password: values.password,
-      });
+  const iniciarSesion = (values) => {
+    // Validación de las credenciales
+    const user = users.find(
+      (user) =>
+        user.username === values.user && user.password === values.password
+    );
 
-      // Guardar tokens (temporal para desarrollo)
-      localStorage.setItem("accessToken", res.data.accessToken);
-      localStorage.setItem("refreshToken", res.data.refreshToken);
-
-      message.success("Inicio de sesión correctamente");
+    if (user) {
       navigate("/inicio");
-    } catch (err) {
-      // Si el backend devuelve 401 u otro error
+      message.success("Inicio de sesión correctamente ");
+    } else {
       message.error("Usuario o contraseña incorrectos");
     }
   };
+  // const iniciarSesion = async (values) => {
+  //   try {
+  //     // Petición al backend Spring Boot
+  //     const res = await axios.post(`${API_URL}/auth/login`, {
+  //       username: values.user,
+  //       password: values.password,
+  //     });
+
+  //     // Guardar tokens (temporal para desarrollo)
+  //     localStorage.setItem("accessToken", res.data.accessToken);
+  //     localStorage.setItem("refreshToken", res.data.refreshToken);
+
+  //     message.success("Inicio de sesión correctamente");
+  //     navigate("/inicio");
+  //   } catch (err) {
+  //     // Si el backend devuelve 401 u otro error
+  //     message.error("Usuario o contraseña incorrectos");
+  //   }
+  // };
 
   return (
     <div className="contenedor-principal">

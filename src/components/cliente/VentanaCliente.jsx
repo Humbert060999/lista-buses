@@ -143,6 +143,16 @@ export default function VentanaCliente() {
       nombres: "Edber",
       apellidos: "Alfaro Nina",
     },
+    {
+      license: "4024384",
+      nombres: "Limbert",
+      apellidos: "Aro Lima",
+    },
+    {
+      license: "7943258",
+      nombres: "Julio Cesar",
+      apellidos: "Andia Crespo",
+    },
   ];
 
   const listTrucks = [
@@ -179,12 +189,24 @@ export default function VentanaCliente() {
       chasis: "9BVT2T123GE385828",
       motor: "",
     },
+    {
+      placa: "KCLT56",
+      resolucionChilena: "1321/2023 DNO",
+      vence: "203-04-04",
+      modelo: "MERC",
+      anio: 2018,
+      polizaSeguro: "74000000792186",
+      VTO: "02-07-2026",
+      chasis: "9BM634071JB069583",
+      motor: "457908U1016588",
+    },
   ];
 
   const listSelectTruck = [
     // { value: "JBXY57", label: "JBXY57" },
     // { value: "CSHW32", label: "CSHW32" },
     { value: "JVTY12", label: "JVTY12" },
+    { value: "KCLT56", label: "KCLT56" },
   ];
 
   // Función que devuelve una promesa con el nuevo ID
